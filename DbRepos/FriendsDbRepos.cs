@@ -80,19 +80,19 @@ public class FriendsDbRepos
     {
             var parameters = new List<SqlParameter>();
 
-            var _retvalue = new SqlParameter("retval", SqlDbType.Int) { Direction = ParameterDirection.Output };
-            var _seeded = new SqlParameter("seeded", seeded);
-            var _nrF = new SqlParameter("nrF", SqlDbType.Int) { Direction = ParameterDirection.Output };
-            var _nrA = new SqlParameter("nrA", SqlDbType.Int) { Direction = ParameterDirection.Output };
-            var _nrP = new SqlParameter("nrP", SqlDbType.Int) { Direction = ParameterDirection.Output };
-            var _nrQ = new SqlParameter("nrQ", SqlDbType.Int) { Direction = ParameterDirection.Output };
+            var retValue = new SqlParameter("retval", SqlDbType.Int) { Direction = ParameterDirection.Output };
+            var seededArg = new SqlParameter("seeded", seeded);
+            var nrF = new SqlParameter("nrF", SqlDbType.Int) { Direction = ParameterDirection.Output };
+            var nrA = new SqlParameter("nrA", SqlDbType.Int) { Direction = ParameterDirection.Output };
+            var nrP = new SqlParameter("nrP", SqlDbType.Int) { Direction = ParameterDirection.Output };
+            var nrQ = new SqlParameter("nrQ", SqlDbType.Int) { Direction = ParameterDirection.Output };
 
-            parameters.Add(_retvalue);
-            parameters.Add(_seeded);
-            parameters.Add(_nrF);
-            parameters.Add(_nrA);
-            parameters.Add(_nrP);
-            parameters.Add(_nrQ);
+            parameters.Add(retValue);
+            parameters.Add(seededArg);
+            parameters.Add(nrF);
+            parameters.Add(nrA);
+            parameters.Add(nrP);
+            parameters.Add(nrQ);
 
             //there is no FromSqlRawAsync to I make one here
             var _query = await Task.Run(() =>
@@ -107,8 +107,8 @@ public class FriendsDbRepos
             //gstusrInfoDbDto result_set = _query.ToList()[0];  //alternative to show you get List
 
             //Check the return code
-            int _retcode = (int)_retvalue.Value;
-            if (_retcode != 0) throw new Exception("supusr.spDeleteAll return code error");
+            int retCode = (int)retValue.Value;
+            if (retCode != 0) throw new Exception("supusr.spDeleteAll return code error");
             #endregion
 
             return await DbInfo();
