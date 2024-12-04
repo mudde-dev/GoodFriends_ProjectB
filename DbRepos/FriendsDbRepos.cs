@@ -78,28 +78,40 @@ public class FriendsDbRepos
     
     public async Task<GstUsrInfoAllDto> RemoveSeedAsync(bool seeded)
     {
-        var parameters = new List<SqlParameter>();
+            var parameters = new List<SqlParameter>();
 
-        var retvalue = new SqlParameter("retval", SqlDbType.Int) { Direction = ParameterDirection.Output };
-        var seededArg = new SqlParameter("seeded", seeded);
-        var nrF = new SqlParameter("nrF", SqlDbType.Int) { Direction = ParameterDirection.Output };
-        var nrA = new SqlParameter("nrA", SqlDbType.Int) { Direction = ParameterDirection.Output };
-        var nrP = new SqlParameter("nrP", SqlDbType.Int) { Direction = ParameterDirection.Output };
-        var nrQ = new SqlParameter("nrQ", SqlDbType.Int) { Direction = ParameterDirection.Output };
+            var _retvalue = new SqlParameter("retval", SqlDbType.Int) { Direction = ParameterDirection.Output };
+            var _seeded = new SqlParameter("seeded", seeded);
+            var _nrF = new SqlParameter("nrF", SqlDbType.Int) { Direction = ParameterDirection.Output };
+            var _nrA = new SqlParameter("nrA", SqlDbType.Int) { Direction = ParameterDirection.Output };
+            var _nrP = new SqlParameter("nrP", SqlDbType.Int) { Direction = ParameterDirection.Output };
+            var _nrQ = new SqlParameter("nrQ", SqlDbType.Int) { Direction = ParameterDirection.Output };
 
-        parameters.Add(retvalue);
-        parameters.Add(seededArg);
-        parameters.Add(nrF);
-        parameters.Add(nrA);
-        parameters.Add(nrP);
-        parameters.Add(nrQ);
+            parameters.Add(_retvalue);
+            parameters.Add(_seeded);
+            parameters.Add(_nrF);
+            parameters.Add(_nrA);
+            parameters.Add(_nrP);
+            parameters.Add(_nrQ);
 
-        await Task.Run(() =>
-            _dbContext.InfoDbView.FromSqlRaw($"EXEC @retval = supusr.spDeleteAll @seeded," +
-                $"@nrF OUTPUT, @nrA OUTPUT, " +
-                $"@nrP OUTPUT, @nrQ OUTPUT", parameters.ToArray()).AsEnumerable());
+            //there is no FromSqlRawAsync to I make one here
+            var _query = await Task.Run(() =>
+                _dbContext.InfoDbView.FromSqlRaw($"EXEC @retval = supusr.spDeleteAll @seeded," +
+                    $"@nrF OUTPUT, @nrA OUTPUT, " +
+                    $"@nrP OUTPUT, @nrQ OUTPUT", parameters.ToArray()).AsEnumerable());
 
-        return await DbInfo();
+            #region not used, just to show the pattern to read result
+            //Execute the query and get the sp result set.
+            //Although, I am not using this result set, but it shows how to get it
+            GstUsrInfoDbDto result_set = _query.FirstOrDefault();
+            //gstusrInfoDbDto result_set = _query.ToList()[0];  //alternative to show you get List
+
+            //Check the return code
+            int _retcode = (int)_retvalue.Value;
+            if (_retcode != 0) throw new Exception("supusr.spDeleteAll return code error");
+            #endregion
+
+            return await DbInfo();
     }
     #endregion
     
