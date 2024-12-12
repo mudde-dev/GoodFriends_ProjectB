@@ -1,5 +1,7 @@
 using Services;
 using Configuration;
+using DbRepos;
+using DbContext;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,10 +10,14 @@ builder.Services.AddRazorPages();
 
 
 //use multiple Secret sources, Database connections and their respective DbContexts
-object value = builder.Configuration.AddApplicationSecrets("../Configuration/Configuration.csproj");
-object value1 = builder.Services.AddDatabaseConnections(builder.Configuration);
+builder.Configuration.AddApplicationSecrets("../Configuration/Configuration.csproj");
+ builder.Services.AddDatabaseConnections(builder.Configuration);
+builder.Services.AddDatabaseConnectionsDbContext();
+
 
 #region Setup the Dependency service
+builder.Services.AddSingleton<ILoggerProvider, InMemoryLoggerProvider>();
+builder.Services.AddScoped<FriendsDbRepos>();
 builder.Services.AddScoped<IFriendsService, FriendsServiceDb>();
 
 #endregion
