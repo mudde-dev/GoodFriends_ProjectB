@@ -11,7 +11,7 @@ public interface IFriendsService
     public Task<GstUsrInfoAllDto> SeedAsync(int nrOfItems);
     public Task<GstUsrInfoAllDto> RemoveSeedAsync(bool seeded);
 
-    public Task<ResponsePageDto<IFriend>> ReadFriendsAsync(bool? seeded = null, bool? flat = null, string filter = null, int? pageNumber = null, int? pageSize = null);
+    public Task<ResponsePageDto<IFriend>> ReadFriendsAsync(bool seeded, bool flat, string filter, int pageNumber, int pageSize);
     public Task<IFriend> ReadFriendAsync(Guid id, bool flat);
     public Task<IFriend> DeleteFriendAsync(Guid id);
     public Task<IFriend> UpdateFriendAsync(FriendCUdto item);

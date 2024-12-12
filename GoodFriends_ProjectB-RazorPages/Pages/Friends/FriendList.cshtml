@@ -1,5 +1,5 @@
 ﻿@page
-@model AppStudies.Pages.ModelListModel
+@model AppStudies.Pages.FriendlListModel
 @{
     ViewData["Title"] = "Study ModelList";
 }
@@ -10,33 +10,18 @@
     <h2 class="pb-2 border-bottom">List of famous quotes</h2>
 
     <p>Below are some famous quotes about love, work and the fact that tomorrow is another day. Select one that your friend likes.</p>
-    @foreach (var item in Model.Quotes)
+    @foreach (var item in Model.Friends)
     {
         <div class="row mb-2 text-center">
             <div class="col-md-10 themed-grid-col">
-                @item.Quote
-                <div class="col-md-16  text-end">@item.Author</div>
+                @item.FirstName @item.LastName
+                <div class="col-md-16  text-end">@item.Birthday @item.Pets</div>
             </div>
             <div class="col-md-2 themed-grid-col">
-                <a href="~/Studies/Model/ModelView?id=@item.QuoteId" class="btn btn-success btn-sm" type="button">View</a>
+                <a href="~/Studies/Model/ModelView?id=@item.FriendId" class="btn btn-success btn-sm" type="button">View</a>
             </div>
         </div>
     }
-
-    <!-- inital template that can be easily hidden -->
-    <div class="d-none">
-        <h2 class="pb-2 border-bottom">TEMPLATE</h2>
-        <div class="row mb-2 text-center">
-            <div class="col-md-10 themed-grid-col">
-                Before you marry a person, you should first make them use a computer with slow Internet to see who they really are.
-                <div class="col-md-16  text-end">Will Ferrell</div>
-            </div>
-            <div class="col-md-2 themed-grid-col">
-                <a href="#" class="btn btn-success btn-sm" type="button">View</a>
-            </div>
-        </div>
-    </div>
-</div>
       
 
 

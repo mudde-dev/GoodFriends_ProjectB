@@ -13,14 +13,7 @@ object value1 = builder.Services.AddDatabaseConnections(builder.Configuration);
 
 #region Setup the Dependency service
 builder.Services.AddScoped<IFriendsService, FriendsServiceDb>();
-builder.Services.AddHttpClient(name: "MusicWebApi", configureClient: options =>
-{
-    options.BaseAddress = new Uri(builder.Configuration["DataService:WebApiBaseUri"]);
-    options.DefaultRequestHeaders.Accept.Add(
-        new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(
-            mediaType: "application/json",
-            quality: 1.0));
-});
+
 #endregion
 
 
