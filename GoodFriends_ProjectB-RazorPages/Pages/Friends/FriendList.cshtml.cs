@@ -25,7 +25,7 @@ namespace AppStudies.Pages
 
 
         //Will execute on a Get request
-        public async IActionResult OnGet()
+        public async Task<IActionResult> OnGet()
         {
             //Just to show how to get current uri
             var uri = Request.Path;
