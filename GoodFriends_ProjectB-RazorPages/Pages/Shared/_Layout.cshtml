@@ -1,0 +1,76 @@
+﻿<!doctype html>
+@using Configuration
+@inject IConfiguration configuration;
+@inject DatabaseConnections dbConnections;
+
+<html lang="en" data-bs-theme="auto">
+<!-- Part of page Frame -->
+<!-- html-head with all resources -->
+<head>
+    <!--From index.cshtml-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Ndawula aria-label Mudde, M.Corp">
+
+    <!-- Modified from index.cshtml-->
+    <title>@ViewData["Title"] - Project-B</title>
+
+    <!--From index.cshtml-->
+    <link rel="apple-touch-icon" sizes="180x180" href="~/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="~/favicon_io/site.webmanifest">
+
+
+    <!--From index.cshtml-->
+    <!-- Bootstrap styles from their respective templates  -->
+    <link href="~/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/bootstrap/navbars-offcanvas.css" rel="stylesheet">
+    <link href="~/css/bootstrap/features.css" rel="stylesheet">
+    <link href="~/css/bootstrap/grid.css" rel="stylesheet">
+    <link href="~/css/bootstrap/sign-in.css" rel="stylesheet">
+    <link href="~/css/bootstrap/modals.css" rel="stylesheet">
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">GoodFriends_ProjectB_RazorPages</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - GoodFriends_ProjectB_RazorPages - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
