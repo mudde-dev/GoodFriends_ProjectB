@@ -1,10 +1,9 @@
 ﻿@page
-@model AppStudies.Pages.FriendlListModel
+@model FriendList
 @{
-    ViewData["Title"] = "Study ModelList";
+    ViewData["Title"] = "FriendList";
 }
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@attribute [IgnoreAntiforgeryToken]
+
 <!-- Page list-of-quotes -->
 <div class="container px-4 py-4" id="list-of-quotes">
     <h2 class="pb-2 border-bottom">List of famous quotes</h2>
@@ -15,7 +14,8 @@
         <div class="row mb-2 text-center">
             <div class="col-md-10 themed-grid-col">
                 @item.FirstName @item.LastName
-                <div class="col-md-16  text-end">@item.Birthday @item.Pets</div>
+                <div class="col-md-16  text-end">@item.Birthday @item.Pets </div>
+                <div class="col-md-16  text-end">@item.Quotes </div>
             </div>
             <div class="col-md-2 themed-grid-col">
                 <a href="~/Studies/Model/ModelView?id=@item.FriendId" class="btn btn-success btn-sm" type="button">View</a>

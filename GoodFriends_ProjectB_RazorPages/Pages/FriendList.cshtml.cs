@@ -8,17 +8,17 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Models;
 using Microsoft.EntityFrameworkCore;
 using Services;
-using AppStudies.Pages;
+using GoodFriends_ProjectB_RazorPages.Pages;
 using Azure.Core;
 
-namespace AppStudies.Pages
+namespace GoodFriends_ProjectB_RazorPages.Pages
 {
     //Demonstrate how to use the model to present a list of objects
-    public class FriendlListModel : PageModel
+    public class FriendList : PageModel
     {
         //Just like for WebApi
         readonly IFriendsService _service = null;
-        readonly ILogger<FriendlListModel> _logger = null;
+        readonly ILogger<FriendList> _logger = null;
 
         //public member becomes part of the Model in the Razor page
 
@@ -104,7 +104,7 @@ namespace AppStudies.Pages
         }
 
         //Inject services just like in WebApi
-        public FriendlListModel(IFriendsService service, ILogger<FriendlListModel> logger)
+        public FriendList(IFriendsService service, ILogger<FriendList> logger)
         {
             _logger = logger;
             _service = service;
