@@ -10,18 +10,15 @@ using Microsoft.EntityFrameworkCore;
 using Services;
 using GoodFriends_ProjectB_RazorPages.Pages;
 using Azure.Core;
-using Seido.Utilities.SeedGenerator;
 
 namespace GoodFriends_ProjectB_RazorPages.Pages
 {
     //Demonstrate how to use the model to present a list of objects
-    public class FriendList : PageModel
+    public class FriendPetCityList : PageModel
     {
         //Just like for WebApi
         readonly IFriendsService _service = null;
         readonly ILogger<FriendList> _logger = null;
-        private readonly SeedGenerator _seedGenerator;
-
 
         //public member becomes part of the Model in the Razor page
 
@@ -30,8 +27,6 @@ namespace GoodFriends_ProjectB_RazorPages.Pages
         public bool UseSeeds { get; set; } = true;
         
      public List<IFriend> Friends { get; set; } = new List<IFriend>();
-        public List<SeededQuote> Quotes { get; set; } = new List<SeededQuote>();
-
 
         public int NrOfFriends { get; set; }
 
@@ -62,9 +57,7 @@ namespace GoodFriends_ProjectB_RazorPages.Pages
             //Use the Service
             var resp = await _service.ReadFriendsAsync(UseSeeds, false, SearchFilter, ThisPageNr, PageSize);
            Friends = resp.PageItems;
-           NrOfFriends = resp.DbItemsCount;
-           
-           Quotes = _seedGenerator.Quotes(1);
+            NrOfFriends = resp.DbItemsCount;
 
             //Pagination
             UpdatePagination(resp.DbItemsCount);
@@ -111,11 +104,10 @@ namespace GoodFriends_ProjectB_RazorPages.Pages
         }
 
         //Inject services just like in WebApi
-        public FriendList(IFriendsService service, ILogger<FriendList> logger)
+        public FriendPetCityList(IFriendsService service, ILogger<FriendList> logger)
         {
             _logger = logger;
             _service = service;
-            _seedGenerator = new SeedGenerator();
         }
     }
 }
