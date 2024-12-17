@@ -1,21 +1,22 @@
 ﻿@page
-@model FriendCountryList
+@model FriendPetCityList
 @{
     ViewData["Title"] = "FriendPetCityList";
 }
 
 <!-- Page list-of-quotes -->
 <div class="container px-4 py-4" id="list-of-quotes">
-    <h2 class="pb-2 border-bottom">List of famous quotes</h2>
+    <h2 class="pb-2 border-bottom">Pets in cities</h2>
 
-    <p>Below are some famous quotes about love, work and the fact that tomorrow is another day. Select one that your friend likes.</p>
+    <p>Overview Friends and Pets in the cities of a specific country</p>
 
    @foreach( var item in Model.Friends)
         {
         <!-- Page friends-by-country -->
     <div class="container px-4 py-4" id="friends-by-country">
-        <h2 class="pb-2 border-bottom">Friends by country</h2>
-        <p>Click in on a country below to see what cities my friends are living in.</p>
+    
+        <h2 class="pb-2 border-bottom">Friends and Pets by City and Country</h2>
+ 
     
      
         <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
@@ -23,8 +24,31 @@
             <div class="col">
               <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('./img/unsplash-photo-3.jpg');">
                 <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                  <h3 class="pt-1 mt-1 mb-4 display-6 lh-1 fw-bold">@item.Address</h3>
-                    <p class="fs-5">@item.FirstName </p>
+                  <h3 class="pt-1 mt-1 mb-4 display-6 lh-1 fw-bold">@item.FirstName @item.LastName</h3>
+                  <p>@item.Address</p>
+
+                  
+
+                @{
+                    var random = new Random();
+                    var allAnimals = Html.GetEnumSelectList<GoodFriends_ProjectB_RazorPages.Pages.AnimalKind>().ToList();
+
+                    // Shuffle the list
+                    var shuffledAnimals = allAnimals.OrderBy(x => random.Next()).ToList();
+
+                    // Randomly decide how many items to take (1 to allAnimals.Count)
+                    int randomCount = random.Next(1, allAnimals.Count + 1);
+
+                    var randomSubset = shuffledAnimals.Take(randomCount).ToList();
+                }
+
+
+                  @foreach( var pet in randomSubset)
+                    {
+                         <p class="fs-5">pet: @pet.Text</p>
+                    }
+                 
+                    
                 </div>
               </div>
             </div>

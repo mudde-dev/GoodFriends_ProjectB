@@ -10,15 +10,22 @@ using Microsoft.EntityFrameworkCore;
 using Services;
 using GoodFriends_ProjectB_RazorPages.Pages;
 using Azure.Core;
+using Seido.Utilities.SeedGenerator;
+
+
 
 namespace GoodFriends_ProjectB_RazorPages.Pages
 {
+
+    public enum AnimalKind { Dog, Cat, Rabbit, Fish, Bird };
     //Demonstrate how to use the model to present a list of objects
     public class FriendPetCityList : PageModel
     {
         //Just like for WebApi
         readonly IFriendsService _service = null;
         readonly ILogger<FriendList> _logger = null;
+
+        private readonly SeedGenerator _seedGenerator;
 
         //public member becomes part of the Model in the Razor page
 
@@ -27,6 +34,8 @@ namespace GoodFriends_ProjectB_RazorPages.Pages
         public bool UseSeeds { get; set; } = true;
         
      public List<IFriend> Friends { get; set; } = new List<IFriend>();
+
+     public List<AnimalKind> Pets { get; set; } = new List<AnimalKind>();
 
         public int NrOfFriends { get; set; }
 
@@ -58,6 +67,8 @@ namespace GoodFriends_ProjectB_RazorPages.Pages
             var resp = await _service.ReadFriendsAsync(UseSeeds, false, SearchFilter, ThisPageNr, PageSize);
            Friends = resp.PageItems;
             NrOfFriends = resp.DbItemsCount;
+
+         
 
             //Pagination
             UpdatePagination(resp.DbItemsCount);

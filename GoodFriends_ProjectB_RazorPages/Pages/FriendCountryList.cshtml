@@ -6,16 +6,16 @@
 
 <!-- Page list-of-quotes -->
 <div class="container px-4 py-4" id="list-of-quotes">
-    <h2 class="pb-2 border-bottom">List of famous quotes</h2>
+    <h2 class="pb-2 border-bottom">Overview Friends by country</h2>
 
-    <p>Below are some famous quotes about love, work and the fact that tomorrow is another day. Select one that your friend likes.</p>
+    <p>Overview Friends by country</p>
 
    @foreach( var item in Model.Friends)
         {
         <!-- Page friends-by-country -->
     <div class="container px-4 py-4" id="friends-by-country">
         <h2 class="pb-2 border-bottom">Friends by country</h2>
-        <p>Click in on a country below to see what cities my friends are living in.</p>
+        <p>Here is a list of what cities my friends are living in.</p>
     
      
         <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
@@ -24,7 +24,7 @@
               <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('./img/unsplash-photo-3.jpg');">
                 <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
                   <h3 class="pt-1 mt-1 mb-4 display-6 lh-1 fw-bold">@item.Address</h3>
-                    <p class="fs-5">@item.FirstName </p>
+                    <p class="fs-5">@item.FirstName @item.LastName </p>
                 </div>
               </div>
             </div>
