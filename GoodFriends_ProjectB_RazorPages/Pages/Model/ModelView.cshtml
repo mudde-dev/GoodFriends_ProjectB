@@ -1,0 +1,100 @@
+@page
+@model GoodFriends_ProjectB_RazorPages.Pages.Model.ModelViewModel
+@{
+    ViewData["Title"] = "ModelView";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@attribute [IgnoreAntiforgeryToken]
+
+<!-- Page view-quote -->
+<div class="container px-4 py-4" id="view-group">
+    <form class="needs-validation" novalidate>
+        <h2 class="pb-2 border-bottom">
+            View details of a Friend
+
+            <!-- Without Validation -->
+            <a href="~/Studies/FormEdit/InputModelSimple?id=@Model.Friend?.FriendId">
+                <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
+            </a>
+
+            <!-- With ServerValidation -->
+            <a href="~/Studies/FormValidation/ServerSideSimple?id=@Model.Friend?.FriendId">
+                <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
+            </a>
+
+            <!-- With Client and Server Validation -->
+            <a href="~/Studies/FormValidation/ClientSideSimple?id=@Model.Friend?.FriendId">
+                <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
+            </a>
+
+        </h2>
+
+        @if (Model.ErrorMessage != null)
+        {
+            <div class="row mb-1 text-center">
+                <span class="alert alert-danger" role="alert">
+                    @Model.ErrorMessage
+                </span>
+            </div>
+        }
+        else 
+
+        @foreach( var item in Model.Friends)
+        {
+            <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
+                <div class="col-md-7 col-lg-10">
+
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label for="author" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="author" value="@item.Address" readonly>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="quoteId" class="form-label">QuoteId</label>
+                            <input type="text" class="form-control" id="quoteId" value="@item.Pets " readonly>
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="quote" class="form-label">Quote</label>
+                            <input type="text" class="form-control" id="quote" value="@item.Quotes" readonly>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </form>
+
+    <!-- inital template that can be easily hidden -->
+    <div class="d-none">
+        <form class="needs-validation" method="post" novalidate>
+            <h2 class="pb-2 border-bottom">
+                TEMPLATE
+                <a href="#">
+                    <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
+                </a>
+            </h2>
+
+            <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
+                <div class="col-md-7 col-lg-10">
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label for="author" class="form-label">Author</label>
+                            <input type="text" class="form-control" id="author" value="Sir Connan Doyle" readonly>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="quoteId" class="form-label">QuoteId</label>
+                            <input type="text" class="form-control" id="quoteId" value="123-123" readonly>
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="quote" class="form-label">Quote</label>
+                            <input type="text" class="form-control" id="quote" value="Sherlock is best" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
