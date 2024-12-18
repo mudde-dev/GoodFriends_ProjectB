@@ -24,7 +24,8 @@
                
             </div>
             <div class="col-md-2 themed-grid-col">
-                <a href="~/Studies/Model/ModelView?id=@item.FriendId" class="btn btn-success btn-sm" type="button">View</a>
+@*                 <a href="~/Studies/Model/ModelView?id=@item.FriendId" class="btn btn-success btn-sm" type="button">View</a> *@
+             <a asp-page="/Model/ModelView"w" asp-route-id=@item.FriendId class="btn btn-success btn-sm" type="button">View</a>
             </div>
         </div>
     }

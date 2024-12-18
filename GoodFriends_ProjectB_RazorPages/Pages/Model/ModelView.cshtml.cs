@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Models;
 using Microsoft.EntityFrameworkCore;
 using Services;
-using GoodFriends_ProjectB_RazorPages.Pages;
 
 namespace GoodFriends_ProjectB_RazorPages.Pages.Model
 {
@@ -20,23 +19,29 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Model
         readonly ILogger<ModelViewModel> _logger = null;
 
         //public member becomes part of the Model in the Razor page
-        public Quote Quote { get; set; }
 
-        public IFriend Friend  { get; set; }
+        public IFriend Friend { get; set; }
+        public IPet Pet {get; set;}
 
-        public List<IFriend> Friends {get; set; } = new List<IFriend>();
+        public IQuote Quote {get; set;}
+
         public string ErrorMessage { get; set; } = null;
 
         //Will execute on a Get request
-        public async Task<IActionResult> OnGet()
+        public async Task<IActionResult> OnGet(string id, bool flat)
         {
             try
             {
-                //Read a QueryParameter
-                Guid _id = Guid.Parse(Request.Query["id"]);
+                Guid _id = Guid.Parse(id);
+                /*    //Read a QueryParameter
+                   Guid _id = Guid.Parse(Request.Query["id"]); */
 
                 //Use the Service
-                Quote = (Quote)await _service.ReadQuoteAsync(_id, false);
+                Friend = await _service.ReadFriendAsync(_id, flat);
+                Pet = await _service.ReadPetAsync(_id, flat);
+                Quote = await _service.ReadQuoteAsync(_id, flat);
+
+
             }
             catch (Exception e)
             {
