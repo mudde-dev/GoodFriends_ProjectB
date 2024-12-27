@@ -43,6 +43,7 @@ namespace GoodFriends_ProjectB_RazorPages.Pages
         public int PrevPageNr { get; set; } = 0;
         public int NextPageNr { get; set; } = 0;
         public int NrVisiblePages { get; set; } = 0;
+        public int PresentPages { get; set; } = 0;
 
         //ModelBinding for the form
         [BindProperty]

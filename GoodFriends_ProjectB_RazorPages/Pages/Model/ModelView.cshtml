@@ -13,7 +13,7 @@
             View details of a Friend
 
             <!-- Without Validation -->
-            <a href="~/Studies/FormEdit/InputModelSimple?id=@Model.Friend?.FriendId">
+            <a  asp-page="/InputModelSimpleModel" asp-route-id=@Model.Friend?.FriendId>
                 <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
             </a>
 
@@ -52,10 +52,14 @@
                             <label for="pet" class="form-label">Pets</label>
                             <input type="text" class="form-control" id="pet" value="@Model.Friend?.Pets?.Count" readonly>
                         </div>
+
+                        @foreach ( var quote in Model.Friend?.Quotes)
+                        {
                         <div class="col-sm-6">
                             <label for="quotes" class="form-label">Quote</label>
-                            <input type="text" class="form-control" id="quotes" value="@Model.Friend?.Quotes.ToString() " readonly>
+                            <input type="text" class="form-control" id="quoteId-@quote.QuoteId" value="@quote.QuoteText " readonly>
                         </div> 
+                        }
                     </div>
 
                     @foreach(var pet in Model.Friend.Pets)
