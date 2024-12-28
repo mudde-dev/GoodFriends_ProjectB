@@ -21,16 +21,16 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
     public class InputModelSimpleModel : PageModel
     {
         //Just like for WebApi
-        readonly IFriendsService _service = null;
-        readonly ILogger<InputModelSimpleModel> _logger = null;
+        readonly IFriendsService? _service = null;
+        readonly ILogger<InputModelSimpleModel>? _logger = null;
 
         [BindProperty]
-        public FamousFriendIM? FriendIM { get; set; }
+        public FamousFriendIM FriendIM { get; set; }
 
         public string PageHeader { get; set; }
 
         //public member becomes part of the Model in the Razor page
-        public string ErrorMessage { get; set; } = null;
+        public string? ErrorMessage { get; set; } = null;
 
 
         //For Server Side Validation set by IsValid()
@@ -143,7 +143,7 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
             public  IAddress  Address { get; set; } 
 
             [Required(ErrorMessage = "You must provide a Pet")]
-            public List<IPet> Pets { get; set; } = null;
+            public List<IPet> Pets { get; set; }
 
       
 

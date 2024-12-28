@@ -185,10 +185,17 @@
         </div>
     </footer>
 
+
+  <!-- Part of page Frame -->
+    <!-- Bootstrap Javascript -->
+    <script src="~/script/bootstrap/bootstrap.bundle.min.js"></script>
+
+    <!-- .NET unobstrusive validation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-    @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Script", required: false)
 </body>
 </html>

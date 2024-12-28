@@ -60,7 +60,7 @@
 
                          @if (Model.FriendIM?.Quote != null)
                         {
-                                @foreach( var quote in Model.FriendIM?.Quote) 
+                                @foreach( var quote in Model.FriendIM.Quote) 
                                 {
                                 <div class="col-sm-12">
                                     <label for="quote" class="form-label">Quote</label>
@@ -71,7 +71,7 @@
                         }
                         @if (Model.FriendIM?.Pets != null)
                         {
-                            @foreach ( var pet in Model.FriendIM?.Pets)
+                            @foreach ( var pet in Model.FriendIM.Pets)
                             {
                             <div class="col-sm-6">
                                 <label for="author" class="form-label">Pet</label>
@@ -123,10 +123,10 @@
     </div>
 </div>
 
-@* @section script
+ @section script
 {
     <!-- -->
     <partial name="_ValidationScriptsPartial" />
 }
- *@
+ 
 
