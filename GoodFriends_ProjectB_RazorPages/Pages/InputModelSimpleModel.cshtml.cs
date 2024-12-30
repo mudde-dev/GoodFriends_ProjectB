@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
+using AppStudies.SeidoHelpers;
 using Models;
 using Microsoft.EntityFrameworkCore;
 using Services;
@@ -14,7 +14,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Models.DTO;
-using AppStudies.SeidoHelpers;
+
 
 namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
 {
@@ -117,6 +117,36 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
             return Page();
         }
 
+        //CAN´T ACCESS ENUMERABLE METHODS OR GENERIC *FIND INDEX METHODS*
+
+/*         public IActionResult OnPostDelete(Guid friendId)
+        {
+            //Set the Quote as deleted, it will not be rendered
+            FriendIM.First(q => q.FriendId == friendId).StatusIM = StatusIM.Deleted;
+            return Page();
+        }
+
+        public IActionResult OnPostEdit(Guid quoteId)
+        {
+            int idx = FriendIM.FindIndex(q => q.FriendId == friendId);
+            string[] keys = { $"QuotesIM[{idx}].EditQuote",
+                            $"QuotesIM[{idx}].EditAuthor"};
+            if (!ModelState.IsValidPartially(out ModelValidationResult validationResult, keys))
+            {
+                ValidationResult = validationResult;
+                return Page();
+            }
+
+            //Set the Quote as Modified, it will later be updated in the database
+            var q = FriendIM.First(q => q.QuoteId == quoteId);
+            q.StatusIM = StatusIM.Modified;
+
+            //Implement the changes
+            q.Author = q.EditAuthor;
+            q.Quote = q.EditQuote;
+            return Page();
+        } */
+
 
         //Inject services just like in WebApi
         public InputModelSimpleModel(IFriendsService service, ILogger<InputModelSimpleModel> logger)
@@ -142,13 +172,13 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
 
 
             [Required(ErrorMessage = "You type provide a quote")]
-            public List<IQuote> Quote { get; set; }= null;
+            public List<IQuote> Quote { get; set; }
 
             [Required(ErrorMessage = "You must provide an Address")]            
-            public IAddress Address { get; set; }  = null;
+            public IAddress Address { get; set; }
 
             [Required(ErrorMessage = "You must provide a Pet")]
-            public List<IPet> Pets { get; set; } = null;
+            public List<IPet> Pets { get; set; }
 
             [Required(ErrorMessage = "You must provide an quote")]
             public IAddress EditAddress { get; set; }
