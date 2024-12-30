@@ -14,6 +14,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Models.DTO;
+using AppStudies.SeidoHelpers;
 
 namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
 {
@@ -21,7 +22,7 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
     public class InputModelSimpleModel : PageModel
     {
         //Just like for WebApi
-        readonly IFriendsService? _service = null;
+        readonly IFriendsService _service = null;
         readonly ILogger<InputModelSimpleModel>? _logger = null;
 
         [BindProperty]
@@ -32,6 +33,7 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
         //public member becomes part of the Model in the Razor page
         public string? ErrorMessage { get; set; } = null;
 
+        public ModelValidationResult ValidationResult { get; set; } = new ModelValidationResult(false, null, null);
 
         //For Server Side Validation set by IsValid()
         public bool HasValidationErrors { get; set; }
@@ -47,7 +49,7 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
                 if (Guid.TryParse(Request.Query["id"], out Guid _id))
                 {
                     //Use the Service and populate the InputModel
-                    FriendIM = new FamousFriendIM(_service.ReadFriendAsync(_id, false));
+                    FriendIM = new FamousFriendIM(_service.ReadFriendAsync(_id, true));
                     PageHeader = "Edit details of a friend";
                 }
                 else
@@ -108,7 +110,11 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
 
             //CHANGE THIS PATHWAY!
 
-            return Redirect($"~/Studies/Model/Search?search={FriendIM.FriendId}");
+            //return Redirect($"~/Studies/Model/Search?search={FriendIM.FriendId}");
+
+
+            PageHeader = "Edit details of a quote";
+            return Page();
         }
 
 
@@ -136,16 +142,22 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
 
 
             [Required(ErrorMessage = "You type provide a quote")]
-            public List<IQuote> Quote { get; set; }
+            public List<IQuote> Quote { get; set; }= null;
 
-            [Required(ErrorMessage = "You must provide an Address")]
-            
-            public  IAddress  Address { get; set; } 
+            [Required(ErrorMessage = "You must provide an Address")]            
+            public IAddress Address { get; set; }  = null;
 
             [Required(ErrorMessage = "You must provide a Pet")]
-            public List<IPet> Pets { get; set; }
+            public List<IPet> Pets { get; set; } = null;
 
-      
+            [Required(ErrorMessage = "You must provide an quote")]
+            public IAddress EditAddress { get; set; }
+
+            [Required(ErrorMessage = "You must provide an author")]
+            public List<IPet> EditPets { get; set; }
+
+            [Required(ErrorMessage = "You must provide an quote")]
+            public List<IQuote> EditQuote { get; set; }
 
 
 
@@ -161,6 +173,10 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
                 Quote = original.Quote;
                 Address = original.Address;
                 Pets = original.Pets;
+
+                EditAddress = original.EditAddress;
+                EditQuote = original.EditQuote;
+                EditPets = original.EditPets;
             }
 
             //Model => InputModel constructor
@@ -171,6 +187,10 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
                 Quote = original.Quotes;
                 Address = original.Address;
                 Pets = original.Pets;
+
+                Pets = EditPets = original.Pets;
+                Address = EditAddress = original.Address;
+                Quote = EditQuote = original.Quotes;
             }
 
             public FamousFriendIM()
