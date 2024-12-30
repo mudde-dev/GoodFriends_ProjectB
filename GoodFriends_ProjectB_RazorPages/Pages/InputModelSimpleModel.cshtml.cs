@@ -42,14 +42,14 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
 
 
         //Will execute on a Get request
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGet()
         {
             try
             {
                 if (Guid.TryParse(Request.Query["id"], out Guid _id))
                 {
                     //Use the Service and populate the InputModel
-                    FriendIM = new FamousFriendIM(_service.ReadFriendAsync(_id, true));
+                    FriendIM =  new FamousFriendIM(await _service.ReadFriendAsync(_id, false));
                     PageHeader = "Edit details of a friend";
                 }
                 else
@@ -67,10 +67,10 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
             return Page();
         }
 
-        public IActionResult OnPostUndo()
+        public async Task<IActionResult> OnPostUndo()
         {
             //Use the Service and populate the InputModel
-            FriendIM = new FamousFriendIM(_service.ReadFriendAsync(FriendIM.FriendId, false));          
+            FriendIM = new FamousFriendIM(await _service.ReadFriendAsync(FriendIM.FriendId, false));          
             PageHeader = "Edit details of a friend";
             return Page();
         }
@@ -170,29 +170,34 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
             //Properties from Model which is to be edited in the <form>
             public Guid FriendId { get; init; } = Guid.NewGuid();
 
-
+            [BindProperty]
             [Required(ErrorMessage = "You type provide a quote")]
             public List<IQuote> Quote { get; set; }
 
+            [BindProperty]
             [Required(ErrorMessage = "You must provide an Address")]            
             public IAddress Address { get; set; }
-
+            
+            [BindProperty]
             [Required(ErrorMessage = "You must provide a Pet")]
             public List<IPet> Pets { get; set; }
-
+            
+            [BindProperty]
             [Required(ErrorMessage = "You must provide an quote")]
             public IAddress EditAddress { get; set; }
 
+            [BindProperty]
             [Required(ErrorMessage = "You must provide an author")]
             public List<IPet> EditPets { get; set; }
 
+            [BindProperty]
             [Required(ErrorMessage = "You must provide an quote")]
             public List<IQuote> EditQuote { get; set; }
 
 
 
             #region constructors and model update
-            public FamousFriendIM(Task<IFriend> task) { StatusIM = StatusIM.Unchanged; }
+            public FamousFriendIM(/*Task<IFriend> task*/) { StatusIM = StatusIM.Unchanged; }
 
             //Copy constructor
             public FamousFriendIM(FamousFriendIM original)
@@ -223,9 +228,7 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
                 Quote = EditQuote = original.Quotes;
             }
 
-            public FamousFriendIM()
-            {
-            }
+         
 
             //InputModel => Model
             public IFriend UpdateModel(IFriend model)

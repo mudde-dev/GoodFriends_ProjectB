@@ -8,6 +8,9 @@
 <!-- Page view-quote -->
 <div class="container px-4 py-4" id="view-group">
     <form class="needs-validation" method="post" novalidate>
+        
+       <!-- <input type="hidden" name="FriendId" data-seido-selected-item-id-target /> -->
+      
         <!-- Hidden fields used to bind input model -->
         <input asp-for="FriendIM.FriendId" value="@Model.FriendIM.FriendId" type="hidden" />
         <input asp-for="FriendIM.StatusIM" value="@Model.FriendIM.StatusIM" type="hidden" />
@@ -67,7 +70,7 @@
                                 {
                                 <div class="col-sm-12">
                                     <label for="quote" class="form-label">Quote</label>
-                                    <input type="text" class="form-control" asp-for="FriendIM.Quote" id="quote" value="@Model.FriendIM.Quote">
+                                    <input type="text" class="form-control" asp-for="FriendIM.Quote" id="quote" value="@quote.QuoteText">
                                     <span asp-validation-for="FriendIM.Quote" class="invalid-feedback"></span>
                                 </div>
                                 }
@@ -78,7 +81,7 @@
                             {
                             <div class="col-sm-6">
                                 <label for="author" class="form-label">Pet</label>
-                                <input type="text" class="form-control" asp-for="FriendIM.Pets" id="pets" value="@Model.FriendIM.Pets">
+                                <input type="text" class="form-control" asp-for="FriendIM.Pets" id="pets" value="@pet.Name the @pet.Mood @pet.Kind">
                                 <span asp-validation-for="FriendIM.Pets" class="invalid-feedback"></span>
                             </div>
                             }
