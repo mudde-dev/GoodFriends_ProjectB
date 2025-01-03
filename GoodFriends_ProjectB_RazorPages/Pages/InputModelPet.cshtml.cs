@@ -191,6 +191,9 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
 
             //Properties from Model which is to be edited in the <form>
             public Guid PetId { get; init; } = Guid.NewGuid();
+            public AnimalMood Mood {get; set;}
+            public AnimalKind Kind { get; set; }
+            public string Name {get; set;}
 
         
             [BindProperty]
@@ -214,8 +217,12 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
 
                 PetId = original.PetId;
                 Pets = original.Pets;
+                Mood = original.Mood;
+                Kind = original.Kind;
+                Name = original.Name;
+                
       
-                EditPets = original.EditPets;
+                //EditPets = original.EditPets;
             }
 
             //Model => InputModel constructor
@@ -223,16 +230,26 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
             {
                 StatusIM = StatusIM.Unchanged;
                 PetId = original.PetId;
+                Mood = original.Mood;
+                Kind = (AnimalKind)original.Kind;
+                Name = original.Name;
              
              
             }
 
-         
+            public FamousPetIM()
+            {
+            }
+
+
 
             //InputModel => Model
             public IPet UpdateModel(IPet model)
             {
                 model.PetId = PetId;
+                model.Mood = Mood;
+                model.Kind = (Models.AnimalKind)Kind;
+                model.Name = Name;
        
             
                 return model;
