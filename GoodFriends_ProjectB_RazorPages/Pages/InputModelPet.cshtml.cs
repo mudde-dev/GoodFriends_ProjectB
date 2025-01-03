@@ -19,14 +19,14 @@ using Models.DTO;
 namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
 {
     //Demonstrate how to read Query parameters
-    public class InputModelSimpleModel : PageModel
+    public class InputModelPet : PageModel
     {
         //Just like for WebApi
         readonly IFriendsService _service = null;
-        readonly ILogger<InputModelSimpleModel>? _logger = null;
+        readonly ILogger<InputModelPet>? _logger = null;
 
         [BindProperty]
-        public FamousFriendIM FriendIM { get; set; }
+        public FamousPetIM PetIM { get; set; }
 
         public string PageHeader { get; set; }
 
@@ -49,15 +49,15 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
                 if (Guid.TryParse(Request.Query["id"], out Guid _id))
                 {
                     //Use the Service and populate the InputModel
-                    FriendIM =  new FamousFriendIM(await _service.ReadFriendAsync(_id, false));
-                    PageHeader = "Edit details of a friend";
+                    PetIM =  new FamousPetIM(await _service.ReadPetAsync(_id, false));
+                    PageHeader = "Edit details of a pet";
                 }
                 else
                 {
                     //Create an empty InputModel
-                    FriendIM = new FamousFriendIM();
-                    FriendIM.StatusIM = StatusIM.Inserted;
-                    PageHeader = "Create a new friend";
+                    PetIM = new FamousPetIM();
+                    PetIM.StatusIM = StatusIM.Inserted;
+                    PageHeader = "Create a new pet";
                 }
             }
             catch (Exception e)
@@ -70,8 +70,8 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
         public async Task<IActionResult> OnPostUndo()
         {
             //Use the Service and populate the InputModel
-            FriendIM = new FamousFriendIM(await _service.ReadFriendAsync(FriendIM.FriendId, false));          
-            PageHeader = "Edit details of a friend";
+            PetIM = new FamousPetIM(await _service.ReadPetAsync(PetIM.PetId, false));          
+            PageHeader = "Edit details of a pet";
             return Page();
         }
 
@@ -109,25 +109,25 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
                 FriendIM = new FamousFriendIM(model);
             } */
 
-              if (FriendIM.StatusIM == StatusIM.Inserted)
+              if (PetIM.StatusIM == StatusIM.Inserted)
             {
                 //It is an create
-                var model = FriendIM.UpdateModel(new csFriend());
-                model = await _service.CreateFriendAsync(new FriendCUdto(model));
+                var model = PetIM.UpdateModel(new Pet());
+                model = await _service.CreatePetAsync(new PetCUdto(model));
 
-                FriendIM = new FamousFriendIM(model);
+                PetIM = new FamousPetIM(model);
             }
             else
             {
                 //It is an update
                 //Get orginal
-                var model = await _service.ReadFriendAsync(FriendIM.FriendId, true);
+                var model = await _service.ReadPetAsync(PetIM.PetId, true);
 
                 //update the changes and save
-                model = FriendIM.UpdateModel(model);
-                model = await  _service.UpdateFriendAsync(new FriendCUdto(model));
+                model = PetIM.UpdateModel(model);
+                model = await  _service.UpdatePetAsync(new PetCUdto(model));
                 
-                FriendIM = new FamousFriendIM(model);
+                PetIM = new FamousPetIM(model);
             } 
  
             //CHANGE THIS PATHWAY!
@@ -171,7 +171,7 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
 
 
         //Inject services just like in WebApi
-        public InputModelSimpleModel(IFriendsService service, ILogger<InputModelSimpleModel> logger)
+        public InputModelPet(IFriendsService service, ILogger<InputModelPet> logger)
         {
             _logger = logger;
             _service = service;
@@ -184,81 +184,57 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
         //These classes are in center of ModelBinding and Validation
         public enum StatusIM { Unknown, Unchanged, Inserted, Modified, Deleted }
 
-        public class FamousFriendIM
+        public class FamousPetIM
         {
             //Status of InputModel
             public StatusIM StatusIM { get; set; }
 
             //Properties from Model which is to be edited in the <form>
-            public Guid FriendId { get; init; } = Guid.NewGuid();
+            public Guid PetId { get; init; } = Guid.NewGuid();
 
-            [BindProperty]
-            [Required(ErrorMessage = "You type provide a quote")]
-            public List<IQuote> Quote { get; set; }
-
-            [BindProperty]
-            [Required(ErrorMessage = "You must provide an Address")]            
-            public IAddress Address { get; set; }
-            
+        
             [BindProperty]
             [Required(ErrorMessage = "You must provide a Pet")]
             public List<IPet> Pets { get; set; }
             
+           
             [BindProperty]
-            [Required(ErrorMessage = "You must provide an quote")]
-            public IAddress EditAddress { get; set; }
-
-            [BindProperty]
-            [Required(ErrorMessage = "You must provide an author")]
+            [Required(ErrorMessage = "You must provide an Pet")]
             public List<IPet> EditPets { get; set; }
-
-            [BindProperty]
-            [Required(ErrorMessage = "You must provide an quote")]
-            public List<IQuote> EditQuote { get; set; }
 
 
 
             #region constructors and model update
-            public FamousFriendIM(/*Task<IFriend> task*/) { StatusIM = StatusIM.Unchanged; }
+            public FamousPetIM(Task<IPet> task) { StatusIM = StatusIM.Unchanged; }
 
             //Copy constructor
-            public FamousFriendIM(FamousFriendIM original)
+            public FamousPetIM(FamousPetIM original)
             {
                 StatusIM = original.StatusIM;
 
-                FriendId = original.FriendId;
-                Quote = original.Quote;
-                Address = original.Address;
+                PetId = original.PetId;
                 Pets = original.Pets;
-
-                EditAddress = original.EditAddress;
-                EditQuote = original.EditQuote;
+      
                 EditPets = original.EditPets;
             }
 
             //Model => InputModel constructor
-            public FamousFriendIM(IFriend original)
+            public FamousPetIM(IPet original)
             {
                 StatusIM = StatusIM.Unchanged;
-                FriendId = original.FriendId;
-                Quote = original.Quotes;
-                Address = original.Address;
-                Pets = original.Pets;
-
-                Pets = EditPets = original.Pets;
-                Address = EditAddress = original.Address;
-                Quote = EditQuote = original.Quotes;
+                PetId = original.PetId;
+             
+             
             }
 
          
 
             //InputModel => Model
-            public IFriend UpdateModel(IFriend model)
+            public IPet UpdateModel(IPet model)
             {
-                model.FriendId = FriendId;
-                model.Quotes = Quote;
-                model.Address = Address;
-                model.Pets = Pets;
+                model.PetId = PetId;
+       
+            
                 return model;
             }
             #endregion
