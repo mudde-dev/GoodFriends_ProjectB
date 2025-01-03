@@ -12,18 +12,15 @@ using Services;
 namespace GoodFriends_ProjectB_RazorPages.Pages.Model
 {
     //Demonstrate how to read Query parameters
-    public class ModelViewModel : PageModel
+    public class AddressViewModel : PageModel
     {
         //Just like for WebApi
         readonly IFriendsService _service = null;
-        readonly ILogger<ModelViewModel> _logger = null;
+        readonly ILogger<AddressViewModel> _logger = null;
 
         //public member becomes part of the Model in the Razor page
 
-        public IFriend Friend { get; set; }
-        public IPet Pet {get; set;}
-
-        public IQuote Quote {get; set;}
+        public IAddress Address {get; set;}
 
         public string ErrorMessage { get; set; } = null;
 
@@ -37,9 +34,7 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Model
                    Guid _id = Guid.Parse(Request.Query["id"]); */
 
                 //Use the Service
-                Friend = await _service.ReadFriendAsync(_id, flat);
-                Pet = await _service.ReadPetAsync(_id, flat);
-                Quote = await _service.ReadQuoteAsync(_id, flat);
+                Address = await  _service.ReadAddressAsync(_id, flat)
 
 
             }
@@ -51,7 +46,7 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Model
         }
 
         //Inject services just like in WebApi
-        public ModelViewModel(IFriendsService service, ILogger<ModelViewModel> logger)
+        public AddressViewModel(IFriendsService service, ILogger<AddressViewModel> logger)
         {
             _logger = logger;
             _service = service;

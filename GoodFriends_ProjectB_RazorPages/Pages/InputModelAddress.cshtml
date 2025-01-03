@@ -1,7 +1,7 @@
 ﻿@page
-@model  GoodFriends_ProjectB_RazorPages.Pages.Pages.InputModelPet 
+@model  GoodFriends_ProjectB_RazorPages.Pages.Pages.InputModelAddress 
 @{
-    ViewData["Title"] = " InputModelPet";
+    ViewData["Title"] = " InputModelAddress";
 }
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @attribute [IgnoreAntiforgeryToken]
@@ -12,8 +12,8 @@
        <!-- <input type="hidden" name="FriendId" data-seido-selected-item-id-target /> -->
       
         <!-- Hidden fields used to bind input model -->
-        <input asp-for="PetIM.PetId" value="@Model.PetIM.PetId" type="hidden" />
-        <input asp-for="PetIM.StatusIM" value="@Model.PetIM.StatusIM" type="hidden" />
+        <input asp-for="AddressIM.AddressId" value="@Model.AddressIM.AddressId" type="hidden" />
+        <input asp-for="AddressIM.StatusIM" value="@Model.AddressIM.StatusIM" type="hidden" />
 
 
         <h2 class="pb-2 border-bottom">
@@ -21,7 +21,7 @@
             <button class="btn btn-primary-outline" type="submit" asp-page-handler="Save">
                 <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#save" /></svg>
             </button>
-            @if (Model.PetIM?.StatusIM != GoodFriends_ProjectB_RazorPages.Pages.Pages.InputModelPet.StatusIM.Inserted)
+            @if (Model.AddressIM?.StatusIM != GoodFriends_ProjectB_RazorPages.Pages.Pages.InputModelAddress.StatusIM.Inserted)
             {
                 <button class="btn btn-primary-outline" type="submit" asp-page-handler="Undo">
                     <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#undo" /></svg>
@@ -59,12 +59,12 @@
                         </div>
 
                      
-                        @if (Model.PetIM?.Pets != null)
+                        @if (Model.AddressIM?.Address != null)
                         {
                             <div class="col-sm-6">
                                 <label for="author" class="form-label">Pet</label>
-                                <input type="text" class="form-control" asp-for="PetIM.Pets" id="pets" value="@Model.PetIM.Name the @Model.PetIM.Mood @Model.PetIM.Kind">
-                                <span asp-validation-for="PetIM.Pets" class="invalid-feedback"></span>
+                                <input type="text" class="form-control" asp-for="AddressIM.Address" id="pets" value="@Model.AddressIM.StreetAddress, @Model.AddressIM.ZipCode, @Model.AddressIM.City, @Model.AddressIM.Country">
+                                <span asp-validation-for="AddressIM.Address" class="invalid-feedback"></span>
                             </div>
                             
                         }
