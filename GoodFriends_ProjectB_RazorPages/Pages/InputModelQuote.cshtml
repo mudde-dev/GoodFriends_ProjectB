@@ -1,7 +1,7 @@
 ﻿@page
-@model  GoodFriends_ProjectB_RazorPages.Pages.Pages.InputModelSimpleModel 
+@model  GoodFriends_ProjectB_RazorPages.Pages.Pages.InputModelQuote 
 @{
-    ViewData["Title"] = " InputModelSimpleModel";
+    ViewData["Title"] = " InputModelQuote";
 }
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @attribute [IgnoreAntiforgeryToken]
@@ -12,18 +12,17 @@
        <!-- <input type="hidden" name="FriendId" data-seido-selected-item-id-target /> -->
       
         <!-- Hidden fields used to bind input model -->
-        <input asp-for="FriendIM.FriendId" value="@Model.FriendIM.FriendId" type="hidden" />
-        <input asp-for="FriendIM.StatusIM" value="@Model.FriendIM.StatusIM" type="hidden" />
-        <input asp-for="FriendIM.Address" value="@Model.FriendIM.Address" type="hidden" />
-        <input asp-for="FriendIM.Quote" value="@Model.FriendIM.Quote" type="hidden" />
-        <input asp-for="FriendIM.Pets" value="@Model.FriendIM.Pets" type="hidden" />
+        <input asp-for="QuoteIM.QuoteId" value="@Model.QuoteIM.QuoteId" type="hidden" />
+        <input asp-for="QuoteIM.StatusIM" value="@Model.QuoteIM.StatusIM" type="hidden" />
+        <input asp-for="QuoteIM.Quote" value="@Model.QuoteIM.Quote" type="hidden" />
+   
 
         <h2 class="pb-2 border-bottom">
             @Model.PageHeader
             <button class="btn btn-primary-outline" type="submit" asp-page-handler="Save">
                 <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#save" /></svg>
             </button>
-            @if (Model.FriendIM?.StatusIM != GoodFriends_ProjectB_RazorPages.Pages.Pages.InputModelSimpleModel.StatusIM.Inserted)
+            @if (Model.QuoteIM?.StatusIM != GoodFriends_ProjectB_RazorPages.Pages.Pages.InputModelQuote.StatusIM.Inserted)
             {
                 <button class="btn btn-primary-outline" type="submit" asp-page-handler="Undo">
                     <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#undo" /></svg>
@@ -56,36 +55,17 @@
             <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
                 <div class="col-md-7 col-lg-10">
                     <div class="row g-3">
-                        <div class="col-sm-6">
-                            <label for="author" class="form-label">Address</label>
-                            <input type="text" class="form-control" asp-for="FriendIM.Address" id="address" value="@Model.FriendIM?.Address">
-                            <span asp-validation-for="FriendIM.Address" class="invalid-feedback"></span>
-                        </div>
-                        <div class="col-sm-6">
-                        </div>
-
-                         @if (Model.FriendIM?.Quote != null)
-                        {
-                                @foreach( var quote in Model.FriendIM.Quote) 
-                                {
+                       
+                         @if (Model.QuoteIM?.Quote != null)
+                        {                               
                                 <div class="col-sm-12">
                                     <label for="quote" class="form-label">Quote</label>
-                                    <input type="text" class="form-control" asp-for="FriendIM.Quote" id="quote" value="@quote.QuoteText">
-                                    <span asp-validation-for="FriendIM.Quote" class="invalid-feedback"></span>
+                                    <input type="text" class="form-control" asp-for="QuoteIM.Quote" id="quote" value="@Model.QuoteIM.Quote">
+                                    <span asp-validation-for="QuoteIM.Quote" class="invalid-feedback"></span>
                                 </div>
-                                }
+                                
                         }
-                        @if (Model.FriendIM?.Pets != null)
-                        {
-                            @foreach ( var pet in Model.FriendIM.Pets)
-                            {
-                            <div class="col-sm-6">
-                                <label for="author" class="form-label">Pet</label>
-                                <input type="text" class="form-control" asp-for="FriendIM.Pets" id="pets" value="@pet.Name the @pet.Mood @pet.Kind">
-                                <span asp-validation-for="FriendIM.Pets" class="invalid-feedback"></span>
-                            </div>
-                            }
-                        }
+                   
                         <div class="col-sm-6">
                         </div>
                       
