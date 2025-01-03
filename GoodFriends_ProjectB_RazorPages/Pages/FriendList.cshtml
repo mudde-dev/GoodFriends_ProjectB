@@ -6,9 +6,9 @@
 
 <!-- Page list-of-quotes -->
 <div class="container px-4 py-4" id="list-of-quotes">
-    <h2 class="pb-2 border-bottom">List of famous quotes</h2>
+    <h2 class="pb-2 border-bottom">A List of Friends and their quotes and Birthdate</h2>
 
-    <p>Below are some famous quotes about love, work and the fact that tomorrow is another day. Select one that your friend likes.</p>
+    <p>Below are some Friends and their quotes</p>
     @foreach (var item in Model.Friends)
     {
         <div class="row mb-2 text-center">
@@ -33,19 +33,19 @@
        <nav aria-label="Standard pagination example">
         <ul class="pagination">
             <li class="page-item">
-                <a class="page-link" href="~/Pages/FriendList?pagenr=@Model.PrevPageNr&search=@Model.SearchFilter" aria-label="Previous">
+                <a class="page-link" asp-page="FriendList" asp-route-pagenr=@Model.PrevPageNr asp-route-search=@Model.SearchFilter aria-label="Previous">@*&search=@Model.SearchFilter*@
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            @for (int i = 0; i < Model.PresentPages; i++)
+            @for (int i = 0; i < Model.NrVisiblePages; i++)
             {
                 <li class="page-item">
-                    <a class="page-link" href="~/Pages/FriendList?pagenr=@i&search=@Model.SearchFilter">@(i+1)</a>
+                    <a class="page-link" asp-page="FriendList" asp-route-pagenr=@i asp-route-search=@Model.SearchFilter>@(i+1)</a>@*&search=@Model.SearchFilter*@
                 </li>
 
             }
             <li class="page-item">
-                <a class="page-link" href="~/Pages/FriendList?pagenr=@Model.NextPageNr&search=@Model.SearchFilter" aria-label="Next">
+                <a class="page-link" asp-page="FriendList" asp-route-pagenr=@Model.NextPageNr asp-route-search=@Model.SearchFilter aria-label="Next">@*&search=@Model.SearchFilter*@
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

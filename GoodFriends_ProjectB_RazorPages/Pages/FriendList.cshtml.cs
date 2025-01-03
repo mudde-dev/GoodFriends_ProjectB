@@ -37,7 +37,7 @@ namespace GoodFriends_ProjectB_RazorPages.Pages
 
         //Pagination
         public int NrOfPages { get; set; }
-        public int PageSize { get; } = 10;
+        public int PageSize { get; } = 5;
 
         public int ThisPageNr { get; set; } = 0;
         public int PrevPageNr { get; set; } = 0;

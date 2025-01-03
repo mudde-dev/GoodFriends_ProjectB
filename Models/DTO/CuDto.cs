@@ -27,7 +27,7 @@ public class FriendCUdto
 
     public virtual List<Guid> QuotesId { get; set; } = null;
 
-    public FriendCUdto() { }
+    public FriendCUdto(Task<IFriend> model) { }
     public FriendCUdto(IFriend org)
     {
         FriendId = org.FriendId;
