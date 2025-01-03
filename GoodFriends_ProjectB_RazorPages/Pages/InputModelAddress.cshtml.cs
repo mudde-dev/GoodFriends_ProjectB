@@ -19,14 +19,14 @@ using Models.DTO;
 namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
 {
     //Demonstrate how to read Query parameters
-    public class InputModelPet : PageModel
+    public class InputModelAddress : PageModel
     {
         //Just like for WebApi
         readonly IFriendsService _service = null;
-        readonly ILogger<InputModelPet>? _logger = null;
+        readonly ILogger<InputModelAddress>? _logger = null;
 
         [BindProperty]
-        public FamousPetIM PetIM { get; set; }
+        public FamousAddressIM AddressIM { get; set; }
 
         public string PageHeader { get; set; }
 
@@ -49,15 +49,15 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
                 if (Guid.TryParse(Request.Query["id"], out Guid _id))
                 {
                     //Use the Service and populate the InputModel
-                    PetIM =  new FamousPetIM(await _service.ReadPetAsync(_id, false));
-                    PageHeader = "Edit details of a pet";
+                    AddressIM =  new FamousAddressIM(await _service.ReadAddressAsync(_id, false));
+                    PageHeader = "Edit details of an Address";
                 }
                 else
                 {
                     //Create an empty InputModel
-                    PetIM = new FamousPetIM();
-                    PetIM.StatusIM = StatusIM.Inserted;
-                    PageHeader = "Create a new pet";
+                    AddressIM = new FamousAddressIM();
+                    AddressIM.StatusIM = StatusIM.Inserted;
+                    PageHeader = "Create a new Adress";
                 }
             }
             catch (Exception e)
@@ -70,8 +70,8 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
         public async Task<IActionResult> OnPostUndo()
         {
             //Use the Service and populate the InputModel
-            PetIM = new FamousPetIM(await _service.ReadPetAsync(PetIM.PetId, false));          
-            PageHeader = "Edit details of a pet";
+            AddressIM = new FamousAddressIM(await _service.ReadAddressAsync(AddressIM.AddressId, false));          
+            PageHeader = "Edit details of an Address";
             return Page();
         }
 
@@ -109,25 +109,25 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
                 FriendIM = new FamousFriendIM(model);
             } */
 
-              if (PetIM.StatusIM == StatusIM.Inserted)
+              if (AddressIM.StatusIM == StatusIM.Inserted)
             {
                 //It is an create
-                var model = PetIM.UpdateModel(new Pet());
-                model = await _service.CreatePetAsync(new PetCUdto(model));
+                var model = AddressIM.UpdateModel(new Address());
+                model = await _service.CreateAddressAsync(new AddressCUdto(model));
 
-                PetIM = new FamousPetIM(model);
+                AddressIM = new FamousAddressIM(model);
             }
             else
             {
                 //It is an update
                 //Get orginal
-                var model = await _service.ReadPetAsync(PetIM.PetId, true);
+                var model = await _service.ReadAddressAsync(AddressIM.AddressId, true);
 
                 //update the changes and save
-                model = PetIM.UpdateModel(model);
-                model = await  _service.UpdatePetAsync(new PetCUdto(model));
+                model = AddressIM.UpdateModel(model);
+                model = await  _service.UpdateAddressAsync(new AddressCUdto(model));
                 
-                PetIM = new FamousPetIM(model);
+                AddressIM = new FamousAddressIM(model);
             } 
  
             //CHANGE THIS PATHWAY!
@@ -135,7 +135,7 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
             //return Redirect($"~/Studies/Model/Search?search={FriendIM.FriendId}");
 
 
-            PageHeader = "Edit details of a quote";
+            PageHeader = "Edit details of an Address";
             return Page();
         }
 
@@ -171,7 +171,7 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
 
 
         //Inject services just like in WebApi
-        public InputModelPet(IFriendsService service, ILogger<InputModelPet> logger)
+        public InputModelAddress(IFriendsService service, ILogger<InputModelAddress> logger)
         {
             _logger = logger;
             _service = service;
@@ -184,72 +184,86 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
         //These classes are in center of ModelBinding and Validation
         public enum StatusIM { Unknown, Unchanged, Inserted, Modified, Deleted }
 
-        public class FamousPetIM
+        public class FamousAddressIM
         {
             //Status of InputModel
             public StatusIM StatusIM { get; set; }
 
             //Properties from Model which is to be edited in the <form>
-            public Guid PetId { get; init; } = Guid.NewGuid();
-            public AnimalMood Mood {get; set;}
-            public AnimalKind Kind { get; set; }
-            public string Name {get; set;}
+            public Guid AddressId { get; init; } = Guid.NewGuid();
+        
 
         
             [BindProperty]
-            [Required(ErrorMessage = "You must provide a Pet")]
-            public List<IPet> Pets { get; set; }
+            [Required(ErrorMessage = "You must provide an Address")]
+            public List<IAddress> Address { get; set; }
             
+             [BindProperty]
+            [Required(ErrorMessage = "You must provide an StreetAddress")]
+               public string StreetAddress { get; set; }
+
+             [BindProperty]
+            [Required(ErrorMessage = "You must provide an ZipCode")]
+            public int ZipCode { get; set; }
+
+             [BindProperty]
+            [Required(ErrorMessage = "You must provide an City")]
+             public string City { get; set; }
+             [BindProperty]
+            [Required(ErrorMessage = "You must provide an Country")]
+            public string Country { get; set; }
            
             [BindProperty]
-            [Required(ErrorMessage = "You must provide an Pet")]
-            public string EditPets { get; set; }
+            [Required(ErrorMessage = "You must provide an Address")]
+            public string EditAddress { get; set; }
 
 
 
             #region constructors and model update
-            public FamousPetIM(Task<IPet> task) { StatusIM = StatusIM.Unchanged; }
+            public FamousAddressIM(Task<IAddress> task) { StatusIM = StatusIM.Unchanged; }
 
             //Copy constructor
-            public FamousPetIM(FamousPetIM original)
+            public FamousAddressIM(FamousAddressIM original)
             {
                 StatusIM = original.StatusIM;
 
-                PetId = original.PetId;
-                Pets = original.Pets;
-                Mood = original.Mood;
-                Kind = original.Kind;
-                Name = original.Name;
-                
+                AddressId = original.AddressId;
+                StreetAddress = original.StreetAddress;
+                ZipCode = original.ZipCode;
+                City = original.City;
+                Country = original.Country;
       
                 //EditPets = original.EditPets;
             }
 
             //Model => InputModel constructor
-            public FamousPetIM(IPet original)
+            public FamousAddressIM(IAddress original)
             {
                 StatusIM = StatusIM.Unchanged;
-                PetId = original.PetId;
-                Mood = original.Mood;
-                Kind = (AnimalKind)original.Kind;
-                Name = original.Name;
+                
+                AddressId = original.AddressId;
+                StreetAddress = original.StreetAddress;
+                ZipCode = original.ZipCode;
+                City = original.City;
+                Country = original.Country;
              
              
             }
 
-            public FamousPetIM()
+            public FamousAddressIM()
             {
             }
 
 
 
             //InputModel => Model
-            public IPet UpdateModel(IPet model)
+            public IAddress UpdateModel(IAddress model)
             {
-                model.PetId = PetId;
-                model.Mood = Mood;
-                model.Kind = (Models.AnimalKind)Kind;
-                model.Name = Name;
+                model.AddressId = AddressId;
+                model.StreetAddress = StreetAddress;
+                model.ZipCode = ZipCode;
+                model.City = City;
+                model.Country = Country;
        
             
                 return model;

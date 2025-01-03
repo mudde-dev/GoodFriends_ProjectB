@@ -1,0 +1,112 @@
+@page
+@model GoodFriends_ProjectB_RazorPages.Pages.Model.ModelViewModel
+@{
+    ViewData["Title"] = "ModelView";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@attribute [IgnoreAntiforgeryToken]
+
+<!-- Page view-quote -->
+<div class="container px-4 py-4" id="view-group">
+    <form class="needs-validation" novalidate>
+        <h2 class="pb-2 border-bottom">
+            View details of a Friend
+
+            <!-- Without Validation -->
+            <a  asp-page="/InputModelSimpleModel" asp-route-id=@Model.Friend?.FriendId>
+                <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
+            </a>
+
+    @*         <!-- With ServerValidation -->
+            <a href="~/Studies/FormValidation/ServerSideSimple?id=@Model.Friend?.FriendId">
+                <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
+            </a>
+
+            <!-- With Client and Server Validation -->
+            <a href="~/Studies/FormValidation/ClientSideSimple?id=@Model.Friend?.FriendId">
+                <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
+            </a> *@
+
+        </h2>
+
+        @if (Model.ErrorMessage != null)
+        {
+            <div class="row mb-1 text-center">
+                <span class="alert alert-danger" role="alert">
+                    @Model.ErrorMessage
+                </span>
+            </div>
+        }
+        else 
+        {
+            <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
+                <div class="col-md-7 col-lg-10">
+
+                    
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label for="friend" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="friend" value="@Model.Friend?.Address" readonly>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="pet" class="form-label">Pets</label>
+                            <input type="text" class="form-control" id="pet" value="@Model.Friend?.Pets?.Count" readonly>
+                        </div>
+
+                        @foreach ( var quote in Model.Friend?.Quotes)
+                        {
+                        <div class="col-sm-6">
+                            <label for="quotes" class="form-label">Quote</label>
+                            <input type="text" class="form-control" id="quoteId-@quote.QuoteId" value="@quote.QuoteText " readonly>
+                        </div> 
+                        }
+                    </div>
+
+                    @foreach(var pet in Model.Friend.Pets)
+                    {
+                           <div class="col-sm-6">
+                            <label for="petsId-@pet.PetId" class="form-label">Pets</label>
+                            <input type="text" class="form-control" id="petsId-@pet.PetId" value="@pet.Name thé @pet.Mood @pet.Kind" readonly>
+                        </div>
+
+                    }
+
+                </div>
+            </div>
+        }
+    </form>
+
+    <!-- inital template that can be easily hidden -->
+    <div class="d-none">
+        <form class="needs-validation" method="post" novalidate>
+            <h2 class="pb-2 border-bottom">
+                TEMPLATE
+                <a href="#">
+                    <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
+                </a>
+            </h2>
+
+            <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
+                <div class="col-md-7 col-lg-10">
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label for="author" class="form-label">Author</label>
+                            <input type="text" class="form-control" id="author" value="Sir Connan Doyle" readonly>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="quoteId" class="form-label">QuoteId</label>
+                            <input type="text" class="form-control" id="quoteId" value="123-123" readonly>
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="quote" class="form-label">Quote</label>
+                            <input type="text" class="form-control" id="quote" value="Sherlock is best" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
