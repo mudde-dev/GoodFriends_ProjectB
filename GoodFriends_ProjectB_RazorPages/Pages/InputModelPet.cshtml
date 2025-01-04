@@ -14,7 +14,7 @@
         <!-- Hidden fields used to bind input model -->
         <input asp-for="PetIM.PetId" value="@Model.PetIM.PetId" type="hidden" />
         <input asp-for="PetIM.StatusIM" value="@Model.PetIM.StatusIM" type="hidden" />
-         <input asp-for="PetIM.Name" value="@Model.PetIM.Name" type="hidden" />
+         <input asp-for="PetIM.Pets" value="@Model.PetIM.Pets" type="hidden" />
 
 
         <h2 class="pb-2 border-bottom">
@@ -60,15 +60,14 @@
                         </div>
 
                      
-                        @if (Model.PetIM?.Pets != null)
-                        {
-                            <div class="col-sm-6">
-                                <label for="author" class="form-label">Pet</label>
-                                <input type="text" class="form-control" asp-for="PetIM.Pets" id="pets" value="@Model.PetIM.Name the @Model.PetIM.Mood @Model.PetIM.Kind">
+                       
+                            <div class="col-sm-12">
+                                <label for="pets" class="form-label">Pet</label>
+                                <input type="text" class="form-control" asp-for="PetIM.Pets" id="pets" value="@Model.PetIM?.Name the @Model.PetIM?.Mood @Model.PetIM?.Kind">
                                 <span asp-validation-for="PetIM.Pets" class="invalid-feedback"></span>
                             </div>
                             
-                        }
+                        
                         <div class="col-sm-6">
                         </div>
                       

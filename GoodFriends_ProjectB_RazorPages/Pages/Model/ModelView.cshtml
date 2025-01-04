@@ -19,12 +19,8 @@
 
            
 
-              <a  asp-page="/InputModelQuote" asp-route-id=@Model.Quote?.QuoteId>
-                <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
-            </a>
-              <a  asp-page="/InputModelPet" asp-route-id=@Model.Pet?.PetId>
-                <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
-            </a>
+            
+           
 
     @*         <!-- With ServerValidation -->
             <a href="~/Studies/FormValidation/ServerSideSimple?id=@Model.Friend?.FriendId">
@@ -62,31 +58,87 @@
                             <input type="text" class="form-control" id="lastname" value="@Model.Friend?.LastName" readonly>
                         </div>
                         <div class="col-sm-6">
-                            <a  asp-page="/InputModelAddress" asp-route-id=@Model.Friend?.Address.AddressId>
+                          
+                            <label for="friend" class="form-label">Address</label>  <a  asp-page="/InputModelAddress" asp-route-id=@Model.Friend?.Address.AddressId>
                                     <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
                             </a>
-                            <label for="friend" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="friend" value="@Model.Friend?.Address" readonly>
+                            <input type="text" class="form-control" id="friend" value="@Model.Friend?.Address" readonly> 
                         </div>
-                       
+                                 
 
-                        @foreach ( var quote in Model.Friend?.Quotes)
-                        {
-                        <div class="col-sm-6">
+
+
+                          @foreach (var item in Model?.Friend?.Quotes)
+                    {
+                        <div class="row mb-2 text-center">
                             <label for="quotes" class="form-label">Quote</label>
-                            <input type="text" class="form-control" id="quoteId-@quote.QuoteId" value="@quote.QuoteText " readonly>
-                        </div> 
+                            <div class="col-md-10 themed-grid-col">
+                                @item.QuoteText
+
+                                <div class="col-md-16  text-end">
+                                    <a  asp-page="/InputModelQuote" asp-route-id=@Model.Friend?.Quotes>
+                                                <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
+                                            </a>
+                                </div>
+                            
+
+                            
+                            </div>
+                        @*    <div class="col-md-2 themed-grid-col">
+                                <a href="~/Studies/Model/ModelView?id=@item.FriendId" class="btn btn-success btn-sm" type="button">View</a> 
+                            <a asp-page="/Model/ModelView"w" asp-route-id=@item.FriendId class="btn btn-success btn-sm" type="button">View</a>
+                            </div>*@
+                        </div>
+                    }
+
+
+
+                    @foreach (var item in Model?.Friend?.Pets)
+                        {
+                            <div class="row mb-2 text-center">
+                                <label for="quotes" class="form-label">Pet</label>
+                                <div class="col-md-10 themed-grid-col">
+                                @item.Name the  @item.Mood @item.Kind
+
+                                    <div class="col-md-16  text-end">
+                                        <a  asp-page="/InputModelQuote" asp-route-id=@Model.Friend?.Pets>
+                                                    <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
+                                                </a>
+                                    </div>
+                                
+
+                                
+                                </div>
+                            @*    <div class="col-md-2 themed-grid-col">
+                                    <a href="~/Studies/Model/ModelView?id=@item.FriendId" class="btn btn-success btn-sm" type="button">View</a> 
+                                <a asp-page="/Model/ModelView"w" asp-route-id=@item.FriendId class="btn btn-success btn-sm" type="button">View</a>
+                                </div>*@
+                            </div>
                         }
+
+
+
+
+                         @* this part should be in the InputModel *@
+                        <div class="col-sm-12">
+                            <a  asp-page="/InputModelQuote" asp-route-id=@Model.Friend?.Quotes>
+                                <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
+                            </a>
+                            <label for="quotes" class="form-label">Quote</label>
+                            <input type="text" class="form-control" id="quote" value="@Model.Quote?.QuoteText " readonly>
+                        </div> 
+                                               
                     </div>
 
-                    @foreach(var pet in Model.Friend.Pets)
-                    {
-                           <div class="col-sm-6">
-                            <label for="petsId-@pet.PetId" class="form-label">Pets</label>
-                            <input type="text" class="form-control" id="petsId-@pet.PetId" value="@pet.Name thé @pet.Mood @pet.Kind" readonly>
+                           <div class="col-sm-10">
+                               <a  asp-page="/InputModelPet" asp-route-id=@Model.Friend?.Pets>
+                                    <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
+                                </a>
+                            <label for="pets" class="form-label">Pets</label>
+                            <input type="text" class="form-control" id="pets" value="@Model.Pet?.Name thé @Model.Pet?.Mood @Model.Pet?.Kind" readonly>
                         </div>
 
-                    }
+                    
 
                 </div>
             </div>

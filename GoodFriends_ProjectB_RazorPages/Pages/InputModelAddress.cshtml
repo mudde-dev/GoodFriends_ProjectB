@@ -58,7 +58,7 @@
                        
                         
                         <div class="col-sm-12">
-                                <label for="author" class="form-label">Adress</label>
+                                <label for="address" class="form-label">Adress</label>
                                 <input type="text" class="form-control" asp-for="AddressIM.Address" id="address" value="@Model.AddressIM?.StreetAddress, @Model.AddressIM?.ZipCode, @Model.AddressIM?.City, @Model.AddressIM?.Country">
                                 <span asp-validation-for="AddressIM.Address" class="invalid-feedback"></span>
                         </div>

@@ -10,7 +10,7 @@
 <div class="container px-4 py-4" id="view-group">
     <form class="needs-validation" novalidate>
         <h2 class="pb-2 border-bottom">
-            View details of a Friend
+            View details of a Pet
 
             <!-- Without Validation -->
             <a  asp-page="/InputModelPet" asp-route-id=@Model.Pet.PetId>
@@ -39,7 +39,22 @@
         }
         else 
         {
-            <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
+
+             @foreach (var item in Model?.Pet?.Friend?.Pets)
+    {
+        <div class="row mb-2 text-center">
+            <div class="col-md-10 themed-grid-col">
+                @item.Name the @item.Mood @item.Kind
+            
+
+               
+            </div>
+            <a  asp-page="/InputModelPet" asp-route-id=@Model.Pet?.PetId>
+                <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
+            </a>
+        </div>
+    }
+       @*      <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
                 <div class="col-md-7 col-lg-10">
 
                     
@@ -56,7 +71,7 @@
                     
 
                 </div>
-            </div>
+            </div> *@
         }
     </form>
 
