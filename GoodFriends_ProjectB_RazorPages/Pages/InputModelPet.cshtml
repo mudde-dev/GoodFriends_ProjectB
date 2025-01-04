@@ -14,7 +14,10 @@
         <!-- Hidden fields used to bind input model -->
         <input asp-for="PetIM.PetId" value="@Model.PetIM.PetId" type="hidden" />
         <input asp-for="PetIM.StatusIM" value="@Model.PetIM.StatusIM" type="hidden" />
-         <input asp-for="PetIM.Pets" value="@Model.PetIM.Pets" type="hidden" />
+        <input asp-for="PetIM.Pets" value="@Model.PetIM.Pets" type="hidden" />
+        <input asp-for="PetIM.Name" value="@Model.PetIM.Name" type="hidden" />
+        <input asp-for="PetIM.Mood" value="@Model.PetIM.Mood" type="hidden" />
+        <input asp-for="PetIM.Kind" value="@Model.PetIM.Kind" type="hidden" />
 
 
         <h2 class="pb-2 border-bottom">
@@ -59,15 +62,18 @@
                         <div class="col-sm-6">
                         </div>
 
-                     
-                       
+                    @if (Model.PetIM?.Pets != null)
+                    {
+                       @foreach( var pet in Model.PetIM?.Pets)
+                       {
                             <div class="col-sm-12">
                                 <label for="pets" class="form-label">Pet</label>
-                                <input type="text" class="form-control" asp-for="PetIM.Pets" id="pets" value="@Model.PetIM?.Name the @Model.PetIM?.Mood @Model.PetIM?.Kind">
+                                <input type="text" class="form-control" asp-for="PetIM.Pets" id="pets" value="@pet.Name the @pet.Mood @pet.Kind">
                                 <span asp-validation-for="PetIM.Pets" class="invalid-feedback"></span>
                             </div>
                             
-                        
+                        }
+                    }
                         <div class="col-sm-6">
                         </div>
                       

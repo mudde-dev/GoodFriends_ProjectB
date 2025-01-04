@@ -12,9 +12,9 @@
        <!-- <input type="hidden" name="FriendId" data-seido-selected-item-id-target /> -->
       
         <!-- Hidden fields used to bind input model -->
-        <input asp-for="QuoteIM.QuoteId" value="@Model.QuoteIM.QuoteId" type="hidden" />
-        <input asp-for="QuoteIM.StatusIM" value="@Model.QuoteIM.StatusIM" type="hidden" />
-        <input asp-for="QuoteIM.Quote" value="@Model.QuoteIM.Quote" type="hidden" />
+        <input asp-for="QuoteIM.QuoteId" value="@Model.QuoteIM?.QuoteId" type="hidden" />
+        <input asp-for="QuoteIM.StatusIM" value="@Model.QuoteIM?.StatusIM" type="hidden" />
+        <input asp-for="QuoteIM.Quote" value="@Model.QuoteIM?.Quote" type="hidden" />
    
 
         <h2 class="pb-2 border-bottom">
