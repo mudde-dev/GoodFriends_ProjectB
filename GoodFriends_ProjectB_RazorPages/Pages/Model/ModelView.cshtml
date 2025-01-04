@@ -17,6 +17,15 @@
                 <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
             </a>
 
+           
+
+              <a  asp-page="/InputModelQuote" asp-route-id=@Model.Quote?.QuoteId>
+                <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
+            </a>
+              <a  asp-page="/InputModelPet" asp-route-id=@Model.Pet?.PetId>
+                <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
+            </a>
+
     @*         <!-- With ServerValidation -->
             <a href="~/Studies/FormValidation/ServerSideSimple?id=@Model.Friend?.FriendId">
                 <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
@@ -44,14 +53,22 @@
 
                     
                     <div class="row g-3">
+                         <div class="col-sm-6">
+                            <label for="pet" class="form-label">FirstName</label>
+                            <input type="text" class="form-control" id="firstname" value="@Model.Friend?.FirstName" readonly>
+                        </div>
+                         <div class="col-sm-6">
+                            <label for="pet" class="form-label">LastName</label>
+                            <input type="text" class="form-control" id="lastname" value="@Model.Friend?.LastName" readonly>
+                        </div>
                         <div class="col-sm-6">
+                            <a  asp-page="/InputModelAddress" asp-route-id=@Model.Friend?.Address.AddressId>
+                                    <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
+                            </a>
                             <label for="friend" class="form-label">Address</label>
                             <input type="text" class="form-control" id="friend" value="@Model.Friend?.Address" readonly>
                         </div>
-                        <div class="col-sm-6">
-                            <label for="pet" class="form-label">Pets</label>
-                            <input type="text" class="form-control" id="pet" value="@Model.Friend?.Pets?.Count" readonly>
-                        </div>
+                       
 
                         @foreach ( var quote in Model.Friend?.Quotes)
                         {

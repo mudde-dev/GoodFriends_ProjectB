@@ -14,6 +14,7 @@
         <!-- Hidden fields used to bind input model -->
         <input asp-for="AddressIM.AddressId" value="@Model.AddressIM.AddressId" type="hidden" />
         <input asp-for="AddressIM.StatusIM" value="@Model.AddressIM.StatusIM" type="hidden" />
+        <input asp-for="AddressIM.Address" value="@Model.AddressIM.Address" type="hidden" />
 
 
         <h2 class="pb-2 border-bottom">
@@ -55,19 +56,16 @@
                 <div class="col-md-7 col-lg-10">
                     <div class="row g-3">
                        
-                        <div class="col-sm-6">
+                        
+                        <div class="col-sm-12">
+                                <label for="author" class="form-label">Adress</label>
+                                <input type="text" class="form-control" asp-for="AddressIM.Address" id="address" value="@Model.AddressIM?.StreetAddress, @Model.AddressIM?.ZipCode, @Model.AddressIM?.City, @Model.AddressIM?.Country">
+                                <span asp-validation-for="AddressIM.Address" class="invalid-feedback"></span>
                         </div>
+                        
 
                      
-                        @if (Model.AddressIM?.Address != null)
-                        {
-                            <div class="col-sm-6">
-                                <label for="author" class="form-label">Pet</label>
-                                <input type="text" class="form-control" asp-for="AddressIM.Address" id="pets" value="@Model.AddressIM.StreetAddress, @Model.AddressIM.ZipCode, @Model.AddressIM.City, @Model.AddressIM.Country">
-                                <span asp-validation-for="AddressIM.Address" class="invalid-feedback"></span>
-                            </div>
-                            
-                        }
+                      
                         <div class="col-sm-6">
                         </div>
                       

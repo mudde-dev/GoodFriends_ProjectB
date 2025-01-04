@@ -34,7 +34,7 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Model
                    Guid _id = Guid.Parse(Request.Query["id"]); */
 
                 //Use the Service
-                Address = await  _service.ReadAddressAsync(_id, flat)
+                Address = await  _service.ReadAddressAsync(_id, flat);
 
 
             }

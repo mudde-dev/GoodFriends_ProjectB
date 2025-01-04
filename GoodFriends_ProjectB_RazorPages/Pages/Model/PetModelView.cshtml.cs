@@ -16,7 +16,7 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Model
     {
         //Just like for WebApi
         readonly IFriendsService _service = null;
-        readonly ILogger<ModelViewModel> _logger = null;
+        readonly ILogger<PetViewModel> _logger = null;
 
         //public member becomes part of the Model in the Razor page
 
