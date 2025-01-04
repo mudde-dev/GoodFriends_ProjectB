@@ -220,28 +220,27 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
                 Mood = original.Mood;
                 Kind = original.Kind;
                 Name = original.Name;
+
+                EditPets = original.EditPets;
                 
       
                 //EditPets = original.EditPets;
             }
 
             //Model => InputModel constructor
-            public FamousPetIM(IPet original)
+            public FamousPetIM(IPet original) :this()
             {
                 StatusIM = StatusIM.Unchanged;
                 PetId = original.PetId;
                 Mood = original.Mood;
                 Kind = (AnimalKind)original.Kind;
-                Name = original.Name;
-             
+                Name = original.Name;            
              
             }
 
             public FamousPetIM()
             {
             }
-
-
 
             //InputModel => Model
             public IPet UpdateModel(IPet model)
