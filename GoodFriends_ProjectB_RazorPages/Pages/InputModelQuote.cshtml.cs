@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -138,6 +138,8 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
             PageHeader = "Edit details of a quote";
             return Page();
         }
+
+       
 
         //CAN´T ACCESS ENUMERABLE METHODS OR GENERIC BECAUSE  = **THIS IS FOR THE EDIT/DELETE LIST OF ADDRESSES - USE LATER!
 

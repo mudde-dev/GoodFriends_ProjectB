@@ -29,8 +29,12 @@ namespace GoodFriends_ProjectB_RazorPages.Pages
         [BindProperty]
         public bool UseSeeds { get; set; } = true;
         
-     public List<IFriend> Friends { get; set; } = new List<IFriend>();
-        public List<SeededQuote> Quotes { get; set; } = new List<SeededQuote>();
+        public List<IFriend> Friends { get; set; } = new List<IFriend>();
+        public List<IQuote> Quotes { get; set; } = new List<IQuote>();
+
+        public List<IPet> Pets {get; set;} = new List<IPet>();
+
+
 
 
         public int NrOfFriends { get; set; }
@@ -38,7 +42,8 @@ namespace GoodFriends_ProjectB_RazorPages.Pages
         //Pagination
         public int NrOfPages { get; set; }
         public int PageSize { get; } = 5;
-
+ 
+        [BindProperty]
         public int ThisPageNr { get; set; } = 0;
         public int PrevPageNr { get; set; } = 0;
         public int NextPageNr { get; set; } = 0;
@@ -65,7 +70,9 @@ namespace GoodFriends_ProjectB_RazorPages.Pages
            Friends = resp.PageItems;
            NrOfFriends = resp.DbItemsCount;
            
-           Quotes = _seedGenerator.Quotes(1);
+            var resp2 = await _service.ReadQuotesAsync(UseSeeds, false, SearchFilter, ThisPageNr, PageSize);
+            Quotes = resp2.PageItems;
+
 
             //Pagination
             UpdatePagination(resp.DbItemsCount);
@@ -111,6 +118,39 @@ namespace GoodFriends_ProjectB_RazorPages.Pages
             return Page();
         }
 
+          public async Task<IActionResult> OnPostDelete(Guid id)
+        {
+          await  _service.DeleteQuoteAsync(id);        
+          
+            //Pagination
+            //UpdatePagination();
+
+            //Use the Service
+            var resp = await _service.ReadQuotesAsync(UseSeeds, false, SearchFilter, ThisPageNr, PageSize);
+            Quotes = resp.PageItems;
+
+            //Quotes =  await _service.ReadQuoteAsync(id, false);
+           // SelectedQuote = _service.ReadQuote(id);
+
+            //Page is rendered as the postback is part of the form tag
+            return Page();
+        }            
+
+        public async Task<IActionResult> OnPostDeletePet(Guid id)
+        {
+          await _service.DeletePetAsync(id);        
+          
+            //Pagination
+            //UpdatePagination();
+
+            var resp2 = await _service.ReadPetsAsync(UseSeeds, false, SearchFilter, ThisPageNr, PageSize);
+            Pets = resp2.PageItems;
+            //Quotes =  await _service.ReadQuoteAsync(id, false);
+           // SelectedQuote = _service.ReadQuote(id);
+
+            //Page is rendered as the postback is part of the form tag
+            return Page();
+        }
         //Inject services just like in WebApi
         public FriendList(IFriendsService service, ILogger<FriendList> logger)
         {
