@@ -14,7 +14,7 @@
         <!-- Hidden fields used to bind input model -->
         <input asp-for="AddressIM.AddressId" value="@Model.AddressIM?.AddressId" type="hidden" />
         <input asp-for="AddressIM.StatusIM" value="@Model.AddressIM?.StatusIM" type="hidden" />
-        <input asp-for="AddressIM.Address" value="@Model.AddressIM?.Address" type="hidden" />
+     
 
 
         <h2 class="pb-2 border-bottom">
@@ -57,11 +57,29 @@
                     <div class="row g-3">
                        
                         
-                        <div class="col-sm-12">
-                                <label for="address" class="form-label">Adress</label>
-                                <input type="text" class="form-control" asp-for="AddressIM.Address" id="address" value="@Model.AddressIM?.StreetAddress, @Model.AddressIM?.ZipCode, @Model.AddressIM.City, @Model.AddressIM?.Country">
-                                <span asp-validation-for="AddressIM.Address" class="invalid-feedback"></span>
-                        </div>
+                            <div class="col-sm-12">
+                                <label for="streetAddress" class="form-label">Adress</label>
+                                <input type="text" class="form-control" asp-for="AddressIM.StreetAddress" id="address" value="@Model.AddressIM?.StreetAddress">
+                                <span asp-validation-for="AddressIM.StreetAddress" class="invalid-feedback"></span>                                
+                                
+                            </div>
+
+                            <div class="col-sm-12">
+                                <label for="zipCode" class="form-label">ZipCode</label>
+                                <input type="text" class="form-control" asp-for="AddressIM.ZipCode" id="zipCode" value="@Model.AddressIM?.ZipCode">
+                                <span asp-validation-for="AddressIM.ZipCode" class="invalid-feedback"></span>
+                                </div>
+
+                            <div class="col-sm-12">
+                                <label for="city" class="form-label">City</label>
+                                <input type="text" class="form-control" asp-for="AddressIM.City" id="address" value="@Model.AddressIM?.City">
+                                <span asp-validation-for="AddressIM.City" class="invalid-feedback"></span>
+                                </div>
+                            <div class="col-sm-12">
+                                <label for="country" class="form-label">Country</label>
+                                <input type="text" class="form-control" asp-for="AddressIM.Country" id="address" value="@Model.AddressIM?.Country">
+                                <span asp-validation-for="AddressIM.Country" class="invalid-feedback"></span>
+                                </div>
                         
 
                      

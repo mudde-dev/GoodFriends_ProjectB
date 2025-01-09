@@ -14,7 +14,7 @@
         <!-- Hidden fields used to bind input model -->
         <input asp-for="QuoteIM.QuoteId" value="@Model.QuoteIM?.QuoteId" type="hidden" />
         <input asp-for="QuoteIM.StatusIM" value="@Model.QuoteIM?.StatusIM" type="hidden" />
-        <input asp-for="QuoteIM.Quote" value="@Model.QuoteIM?.Quote" type="hidden" />
+        <input asp-for="QuoteIM.QuoteText" value="@Model.QuoteIM?.QuoteText" type="hidden" />
    
 
         <h2 class="pb-2 border-bottom">
@@ -56,12 +56,12 @@
                 <div class="col-md-7 col-lg-10">
                     <div class="row g-3">
                        
-                         @if (Model.QuoteIM?.Quote != null)
+                         @if (Model.QuoteIM?.QuoteText != null)
                         {                               
                                 <div class="col-sm-12">
                                     <label for="quote" class="form-label">Quote</label>
-                                    <input type="text" class="form-control" asp-for="QuoteIM.Quote" id="quote" value="@Model.QuoteIM.Quote">
-                                    <span asp-validation-for="QuoteIM.Quote" class="invalid-feedback"></span>
+                                    <input type="text" class="form-control" asp-for="QuoteIM.QuoteText" id="quote" value="@Model.QuoteIM?.QuoteText">
+                                    <span asp-validation-for="QuoteIM.QuoteText" class="invalid-feedback"></span>
                                 </div>
                                 
                         }

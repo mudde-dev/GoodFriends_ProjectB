@@ -194,9 +194,6 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
         
 
         
-            [BindProperty]
-            [Required(ErrorMessage = "You must provide an Address")]
-            public List<IAddress> Address { get; set; }
             
              [BindProperty]
             [Required(ErrorMessage = "You must provide an StreetAddress")]
@@ -213,9 +210,6 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
             [Required(ErrorMessage = "You must provide an Country")]
             public string Country { get; set; }
            
-            [BindProperty]
-            [Required(ErrorMessage = "You must provide an Address")]
-            public string EditAddress { get; set; }
 
 
 

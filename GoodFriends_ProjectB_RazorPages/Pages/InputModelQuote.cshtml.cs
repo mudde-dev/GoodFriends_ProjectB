@@ -196,13 +196,13 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
 
             [BindProperty]
             [Required(ErrorMessage = "You type provide a quote")]
-            public string Quote { get; set; }
+            public string QuoteText { get; set; }
 
           
 
             [BindProperty]
             [Required(ErrorMessage = "You must provide an quote")]
-            public string EditQuote { get; set; }
+            public string EditQuoteText{ get; set; }
 
 
 
@@ -214,9 +214,9 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
             {
                 StatusIM = original.StatusIM;
                 QuoteId = original.QuoteId;
-                Quote = original.Quote;        
+                QuoteText = original.QuoteText;        
               
-                EditQuote = original.Quote;
+                EditQuoteText = original.QuoteText;
              
             }
 
@@ -225,9 +225,9 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
             {
                 StatusIM = StatusIM.Unchanged;
                 QuoteId = original.QuoteId;
-                Quote = original.QuoteText;
+                QuoteText = original.QuoteText;
                
-                EditQuote = original.QuoteText;
+                EditQuoteText = original.QuoteText;
             }
 
           /*   public FamousQuoteIM()
@@ -240,7 +240,7 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
             public IQuote UpdateModel(IQuote model)
             {
                 model.QuoteId = QuoteId;
-                model.QuoteText = Quote;
+                model.QuoteText = QuoteText;
                 return model;
             }
             #endregion
