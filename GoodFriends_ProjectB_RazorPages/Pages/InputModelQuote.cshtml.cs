@@ -67,10 +67,10 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostUndo(Guid id)
+        public async Task<IActionResult> OnPostUndo()
         {
             //Use the Service and populate the InputModel
-            QuoteIM = new FamousQuoteIM(await _service.ReadQuoteAsync(id, false));          
+            QuoteIM = new FamousQuoteIM(await _service.ReadQuoteAsync(QuoteIM.QuoteId, false));          
             PageHeader = "Edit details of a quote";
             return Page();
         }
@@ -207,7 +207,7 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
 
 
             #region constructors and model update
-            public FamousQuoteIM(Task<IQuote> task) { StatusIM = StatusIM.Unchanged; }
+            public FamousQuoteIM(/*Task<IQuote> task*/) { StatusIM = StatusIM.Unchanged; }
 
             //Copy constructor
             public FamousQuoteIM(FamousQuoteIM original)
@@ -216,7 +216,7 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
                 QuoteId = original.QuoteId;
                 Quote = original.Quote;        
               
-                EditQuote = original.EditQuote;
+                EditQuote = original.Quote;
              
             }
 
@@ -227,12 +227,12 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
                 QuoteId = original.QuoteId;
                 Quote = original.QuoteText;
                
-                Quote = EditQuote = original.QuoteText;
+                EditQuote = original.QuoteText;
             }
 
-            public FamousQuoteIM()
+          /*   public FamousQuoteIM()
             {
-            }
+            } */
 
 
 
