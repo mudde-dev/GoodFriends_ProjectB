@@ -14,8 +14,8 @@
         <!-- Hidden fields used to bind input model -->
         <input asp-for="FriendIM.FriendId" value="@Model.FriendIM.FriendId" type="hidden" />
         <input asp-for="FriendIM.StatusIM" value="@Model.FriendIM.StatusIM" type="hidden" />
-        <input asp-for="FriendIM.Address" value="@Model.FriendIM.Address" type="hidden" />
-        <input asp-for="FriendIM.Quote" value="@Model.FriendIM.Quote" type="hidden" />
+       @*  <input asp-for="FriendIM.Address" value="@Model.FriendIM.Address" type="hidden" />
+        <input asp-for="FriendIM.Quote" value="@Model.FriendIM.Quote" type="hidden" /> *@
         <input asp-for="FriendIM.Pets" value="@Model.FriendIM.Pets" type="hidden" />
 
         <h2 class="pb-2 border-bottom">
@@ -57,21 +57,25 @@
                 <div class="col-md-7 col-lg-10">
                     <div class="row g-3">
                         <div class="col-sm-12">
-                            <label for="author" class="form-label">Address</label>
-                            <input type="text" class="form-control" asp-for="FriendIM.Address" id="address" value="@Model.FriendIM?.Address">
-                            <span asp-validation-for="FriendIM.Address" class="invalid-feedback"></span>
+                            <label for="firstName" class="form-label">FirstName</label>
+                            <input type="text" class="form-control" asp-for="FriendIM.FirstName" id="address" value="@Model.FriendIM?.FirstName">
+                            <span asp-validation-for="FriendIM.FirstName" class="invalid-feedback"></span>
+
+                             <label for="lastName" class="form-label">LastName</label>
+                            <input type="text" class="form-control" asp-for="FriendIM.LastName" id="address" value="@Model.FriendIM?.LastName">
+                            <span asp-validation-for="FriendIM.LastName" class="invalid-feedback"></span>
                         </div>
                         <div class="col-sm-6">
                         </div>
 
-                         @if (Model.FriendIM?.Quote != null)
+                         @if (Model.FriendIM?.Quotes != null)
                         {
-                                @foreach( var quote in Model.FriendIM.Quote) 
+                                @foreach( var quote in Model.FriendIM.Quotes) 
                                 {
                                 <div class="col-sm-12">
                                     <label for="quote" class="form-label">Quote</label>
-                                    <input type="text" class="form-control" asp-for="FriendIM.Quote" id="quote" value="@quote.QuoteText">
-                                    <span asp-validation-for="FriendIM.Quote" class="invalid-feedback"></span>
+                                    <input type="text" class="form-control" asp-for="FriendIM.Quotes" id="quote" value="@quote.QuoteText">
+                                    <span asp-validation-for="FriendIM.Quotes" class="invalid-feedback"></span>
                                 </div>
                                 }
                         }

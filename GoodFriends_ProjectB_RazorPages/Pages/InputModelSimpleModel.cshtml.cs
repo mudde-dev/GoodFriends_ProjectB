@@ -193,30 +193,30 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
             public Guid FriendId { get; init; } = Guid.NewGuid();
 
             [BindProperty]
-            [Required(ErrorMessage = "You type provide a quote")]
-            public List<IQuote> Quote { get; set; }
+            [Required(ErrorMessage = "You type provide a FirstName")]
+            public string FirstName { get; set; }
 
             [BindProperty]
-            [Required(ErrorMessage = "You must provide an Address")]            
-            public IAddress Address { get; set; }
-            
+            [Required(ErrorMessage = "You type provide a LastName")]
+            public string LastName { get; set; }
+
             [BindProperty]
-            [Required(ErrorMessage = "You must provide a Pet")]
+            [Required(ErrorMessage = "You type provide a FirstName")]
+            public string EditFirstName { get; set; }
+          
+
+            [BindProperty]
+            [Required(ErrorMessage = "You type provide a LastName")]
+            public string EditLastName { get; set; }
+          
+            [BindProperty]
+            [Required(ErrorMessage = "You type provide a Quote")]
+            public List<IQuote> Quotes { get; set; }
+
+            [BindProperty]
+            [Required(ErrorMessage = "You type provide a Pet")]
             public List<IPet> Pets { get; set; }
-            
-            [BindProperty]
-            [Required(ErrorMessage = "You must provide an quote")]
-            public IAddress EditAddress { get; set; }
-
-            [BindProperty]
-            [Required(ErrorMessage = "You must provide an author")]
-            public List<IPet> EditPets { get; set; }
-
-            [BindProperty]
-            [Required(ErrorMessage = "You must provide an quote")]
-            public List<IQuote> EditQuote { get; set; }
-
-
+          
 
             #region constructors and model update
             public FamousFriendIM(/*Task<IFriend> task*/) { StatusIM = StatusIM.Unchanged; }
@@ -227,13 +227,14 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
                 StatusIM = original.StatusIM;
 
                 FriendId = original.FriendId;
-                Quote = original.Quote;
-                Address = original.Address;
+                FirstName = original.FirstName;
+                LastName = original.LastName;
+                Quotes = original.Quotes;
                 Pets = original.Pets;
-
-                EditAddress = original.EditAddress;
-                EditQuote = original.EditQuote;
-                EditPets = original.EditPets;
+                
+                EditFirstName = original.FirstName;
+                EditLastName = original.LastName;
+                
             }
 
             //Model => InputModel constructor
@@ -241,13 +242,14 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
             {
                 StatusIM = StatusIM.Unchanged;
                 FriendId = original.FriendId;
-                Quote = original.Quotes;
-                Address = original.Address;
+                FirstName = original.FirstName;
+                LastName = original.LastName;
+                Quotes = original.Quotes;
                 Pets = original.Pets;
 
-                Pets = EditPets = original.Pets;
-                Address = EditAddress = original.Address;
-                Quote = EditQuote = original.Quotes;
+                EditFirstName = original.FirstName;
+                EditLastName = original.LastName;
+            
             }
 
          
@@ -256,9 +258,9 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
             public IFriend UpdateModel(IFriend model)
             {
                 model.FriendId = FriendId;
-                model.Quotes = Quote;
-                model.Address = Address;
-                model.Pets = Pets;
+                model.FirstName = FirstName;
+                model.LastName = LastName;
+                
                 return model;
             }
             #endregion

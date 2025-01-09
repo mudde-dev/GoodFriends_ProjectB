@@ -47,10 +47,10 @@
                         </div>
                         <div class="col-sm-6">
                           
-                            <label for="friend" class="form-label">Address</label>  <a  asp-page="/InputModelAddress" asp-route-id=@Model.Friend?.Address.AddressId>
+@*                             <label for="address" class="form-label">Address</label>  <a  asp-page="/InputModelAddress" asp-route-id=@Model.Friend?.Address?.AddressId>
                                     <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
                             </a>
-                            <input type="text" class="form-control" id="friend" value="@Model.Friend?.Address" readonly> 
+                            <input type="text" class="form-control" id="friend" value="@Model.Friend?.Address" readonly>  *@
                         </div>
                                  
 
@@ -119,23 +119,23 @@
 
 
                          @* this part should be in the InputModel *@
-                        <div class="col-sm-12">
+                 @*  <div class="col-sm-12">
                             <a  asp-page="/InputModelQuote" asp-route-id=@Model.Quote?.QuoteId>
                                 <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
                             </a>
                             <label for="quotes" class="form-label">Quote</label>
                             <input type="text" class="form-control" id="quote" value="@Model.Quote?.QuoteText " readonly>
-                        </div> 
+                        </div>  *@
                                                
                     </div>
 
-                           <div class="col-sm-10">
+                       @*     <div class="col-sm-10">
                                <a  asp-page="/InputModelPet" asp-route-id=@Model.Pet?.PetId>
                                     <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
                                 </a>
                             <label for="pets" class="form-label">Pets</label>
                             <input type="text" class="form-control" id="pets" value="@Model.Pet?.Name thé @Model.Pet?.Mood @Model.Pet?.Kind" readonly>
-                        </div>
+                        </div> *@
 
                     
 
@@ -143,25 +143,8 @@
             </div>
         }
 
-            <div class="modal fade" id="dangerDelQModal" tabindex="-1" aria-labelledby="softModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-danger" id="softModalLabel">Confirm deletion</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Quote to be deleted
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" asp-page-handler="Delete" class="btn btn-primary btn-danger" data-bs-dismiss="modal">Ok</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    </form>
+            
+     </form>
 
     <!-- inital template that can be easily hidden -->
     <div class="d-none">
