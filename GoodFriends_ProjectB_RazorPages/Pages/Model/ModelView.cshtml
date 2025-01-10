@@ -73,14 +73,9 @@
 
                             
                             </div>
-                        @*    <div class="col-md-2 themed-grid-col">
-                                <a href="~/Studies/Model/ModelView?id=@item.FriendId" class="btn btn-success btn-sm" type="button">View</a> 
-                            <a asp-page="/Model/ModelView"w" asp-route-id=@item.FriendId class="btn btn-success btn-sm" type="button">View</a>
-                            </div>*@
+                  
                         </div>
                     }
-
-
 
                     @foreach (var item in Model?.Friend?.Pets)
                         {
@@ -94,50 +89,18 @@
                                                     <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
                                         </a>
                                         
-                                        <button type="button" class="btn btn-success btn-sm m-1"
-                                                        data-seido-selected-item-id="@item?.PetId"
-                                                        data-bs-toggle="modal" data-bs-target="#dangerDelQModal"
-
-                                                        data-seido-modal-title="Delete @item?.PetId?" 
-                                                        data-seido-modal-body=" @item?.Name the  @item?.Mood @item?.Kind"
-                                                        data-seido-modal-cancel="No"
-                                                        data-seido-modal-Ok="Delete" 
-                                        >Del</button>
+                
                                     </div>
                                 
 
                                 
                                 </div>
-                            @*    <div class="col-md-2 themed-grid-col">
-                                    <a href="~/Studies/Model/ModelView?id=@item.FriendId" class="btn btn-success btn-sm" type="button">View</a> 
-                                <a asp-page="/Model/ModelView"w" asp-route-id=@item.FriendId class="btn btn-success btn-sm" type="button">View</a>
-                                </div>*@
+                       
                             </div>
                         }
-
-
-
-
-                         @* this part should be in the InputModel *@
-                 @*  <div class="col-sm-12">
-                            <a  asp-page="/InputModelQuote" asp-route-id=@Model.Quote?.QuoteId>
-                                <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
-                            </a>
-                            <label for="quotes" class="form-label">Quote</label>
-                            <input type="text" class="form-control" id="quote" value="@Model.Quote?.QuoteText " readonly>
-                        </div>  *@
                                                
                     </div>
-
-                       @*     <div class="col-sm-10">
-                               <a  asp-page="/InputModelPet" asp-route-id=@Model.Pet?.PetId>
-                                    <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit" /></svg>
-                                </a>
-                            <label for="pets" class="form-label">Pets</label>
-                            <input type="text" class="form-control" id="pets" value="@Model.Pet?.Name thé @Model.Pet?.Mood @Model.Pet?.Kind" readonly>
-                        </div> *@
-
-                    
+                   
 
                 </div>
             </div>

@@ -1,0 +1,59 @@
+﻿@page
+@model FriendINCity
+@{
+    ViewData["Title"] = "FriendINCity";
+}
+
+<!-- Page list-of-quotes -->
+<div class="container px-4 py-4" id="list-of-quotes">
+    <h2 class="pb-2 border-bottom">Friends in Sweden</h2>
+
+ 
+
+    <form method="post">
+
+    <input type="hidden" name="id" data-seido-selected-item-id-target />
+
+     @foreach(var friend in Model?.Friends)
+     {              
+        <div class="row mb-2 text-center">
+            <div class="col-md-10 themed-grid-col">
+                @friend.LastName, @friend.FirstName
+                <div class="col-md-16  text-end">@friend.Address.City</div>
+            </div>
+        
+        </div>
+    }
+                
+          
+
+     
+
+
+    </form>
+       <nav aria-label="Standard pagination example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" asp-page="FriendList" asp-route-pagenr=@Model.PrevPageNr asp-route-search=@Model.SearchFilter aria-label="Previous">@*&search=@Model.SearchFilter*@
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            @for (int i = 0; i < Model.NrVisiblePages; i++)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-page="FriendList" asp-route-pagenr=@i asp-route-search=@Model.SearchFilter>@(i+1)</a>@*&search=@Model.SearchFilter*@
+                </li>
+
+            }
+            <li class="page-item">
+                <a class="page-link" asp-page="FriendList" asp-route-pagenr=@Model.NextPageNr asp-route-search=@Model.SearchFilter aria-label="Next">@*&search=@Model.SearchFilter*@
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    
+      
+ 
+

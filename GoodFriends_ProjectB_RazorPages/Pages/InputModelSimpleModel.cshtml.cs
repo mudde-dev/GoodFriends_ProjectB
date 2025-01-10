@@ -77,37 +77,6 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
 
         public async Task<IActionResult> OnPostSave()
         { 
-            /*
-            //PageHeader is stored in TempData which has to be set after a Post
-            PageHeader = (FriendIM.StatusIM == StatusIM.Inserted) ?
-                "Create a new friend" : "Edit details of a friend";
-
-            //I use IsValid() instead of ModelState.IsValid in order to extract
-            //error information
-            if (!IsValid())
-            {
-                //The page is not valid
-                return Page();
-            }
-
-            if (FriendIM.StatusIM == StatusIM.Inserted)
-            {
-                //It is an create
-                var model = FriendIM.UpdateModel(new csFriend());
-                model = await  _service.CreateFriendAsync(new FriendCUdto(model));
-                FriendIM = new FamousFriendIM(model);
-            }
-            else
-            {
-                //It is an update
-                //Get orginal
-                var model = await _service.ReadFriendAsync(FriendIM.FriendId, true);
-
-                //update the changes and save
-                model = FriendIM.UpdateModel(model);
-                model = await _service.UpdateFriendAsync(new FriendCUdto(model));
-                FriendIM = new FamousFriendIM(model);
-            } */
 
               if (FriendIM.StatusIM == StatusIM.Inserted)
             {
@@ -139,35 +108,7 @@ namespace GoodFriends_ProjectB_RazorPages.Pages.Pages
             return Page();
         }
 
-        //CAN´T ACCESS ENUMERABLE METHODS OR GENERIC BECAUSE  = **THIS IS FOR THE EDIT/DELETE LIST OF ADDRESSES - USE LATER!
-
-     /*      public IActionResult OnPostDelete(Guid friendId)
-        {
-            //Set the Quote as deleted, it will not be rendered
-            FriendIM.First(q => q.FriendId == friendId).StatusIM = StatusIM.Deleted;
-            return Page();
-        }
-
-        public IActionResult OnPostEdit(Guid quoteId)
-        {
-            int idx = FriendIM.FindIndex(q => q.FriendId == friendId);
-            string[] keys = { $"QuotesIM[{idx}].EditQuote",
-                            $"QuotesIM[{idx}].EditAuthor"};
-            if (!ModelState.IsValidPartially(out ModelValidationResult validationResult, keys))
-            {
-                ValidationResult = validationResult;
-                return Page();
-            }
-
-            //Set the Quote as Modified, it will later be updated in the database
-            var q = FriendIM.First(q => q.QuoteId == quoteId);
-            q.StatusIM = StatusIM.Modified;
-
-            //Implement the changes
-            q.Author = q.EditAuthor;
-            q.Quote = q.EditQuote;
-            return Page();
-        }   */
+ 
 
 
         //Inject services just like in WebApi
